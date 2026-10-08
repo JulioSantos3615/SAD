@@ -1,0 +1,23 @@
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .font-serif-title {
+        font-family: 'Playfair Display', Georgia, serif;
+    }
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.05);
+    }
+    ::-webkit-scrollbar-thumb {
+        background: #1d63ed;
+        border-radius: 4px;
+    }
