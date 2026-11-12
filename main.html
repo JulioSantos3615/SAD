@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-PT" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nucleus — Decision Support System for Science Park Selection | ISPGAYA</title>
-    
+    <title>Nucleus — Consultoria de Espaços Empresariais & Simulador AHP</title>
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -34,61 +35,92 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-<body class="bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100 min-h-screen flex flex-col antialiased selection:bg-blue-600 selection:text-white">
+
+<body
+    class="bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100 min-h-screen flex flex-col antialiased selection:bg-blue-600 selection:text-white">
 
     <!-- HEADER / NAVIGATION -->
-    <header class="sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-slate-950/80 border-b border-slate-100 dark:border-slate-800/80 transition-colors duration-200">
+    <header
+        class="sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-slate-950/80 border-b border-slate-100 dark:border-slate-800/80 transition-colors duration-200">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
             <!-- Brand Logo -->
-            <a href="#" class="text-2xl font-bold font-serif-title tracking-tight text-slate-900 dark:text-white flex items-center gap-1 group">
+            <a href="#"
+                class="text-2xl font-bold font-serif-title tracking-tight text-slate-900 dark:text-white flex items-center gap-1 group">
                 <span>Nucleus</span>
                 <span class="text-brand-blue group-hover:translate-x-0.5 transition-transform">.</span>
             </a>
 
             <!-- Desktop Nav Links -->
-            <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold text-slate-600 dark:text-slate-300 tracking-wide uppercase">
+            <nav
+                class="hidden md:flex items-center space-x-8 text-sm font-semibold text-slate-600 dark:text-slate-300 tracking-wide uppercase">
                 <a href="#sobre" class="hover:text-brand-blue dark:hover:text-blue-400 transition-colors">Sobre</a>
-                <a href="#parques" class="hover:text-brand-blue dark:hover:text-blue-400 transition-colors">Parques</a>
-                <a href="#simulador" class="hover:text-brand-blue dark:hover:text-blue-400 transition-colors">Simulador AHP</a>
-                <a href="#equipa" class="hover:text-brand-blue dark:hover:text-blue-400 transition-colors">Equipa</a>
-                <a href="#milestones" class="hover:text-brand-blue dark:hover:text-blue-400 transition-colors">Milestones</a>
+                <a href="#espacos" class="hover:text-brand-blue dark:hover:text-blue-400 transition-colors">Espaços</a>
+                <a href="#simulador" onclick="goToSimulator(event)"
+                    class="hover:text-brand-blue dark:hover:text-blue-400 transition-colors">Simulador AHP</a>
+                <a href="#servicos"
+                    class="hover:text-brand-blue dark:hover:text-blue-400 transition-colors">Consultoria</a>
+                <a href="#processo" class="hover:text-brand-blue dark:hover:text-blue-400 transition-colors">Critérios &
+                    App</a>
             </nav>
 
             <!-- Actions Header Right -->
-            <div class="flex items-center space-x-4">
+            <div class="flex items-center space-x-3">
                 <!-- Theme Toggle Button -->
-                <button id="themeToggleBtn" onclick="toggleDarkMode()" class="p-2.5 rounded-full border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-900 transition-colors flex items-center gap-2 text-xs font-medium" title="Alternar Modo Escuro">
+                <button id="themeToggleBtn" onclick="toggleDarkMode()"
+                    class="p-2.5 rounded-full border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-900 transition-colors flex items-center gap-2 text-xs font-medium"
+                    title="Alternar Modo Escuro">
                     <i id="themeIcon" class="fa-solid fa-moon text-sm"></i>
                     <span id="themeText" class="hidden sm:inline">Escuro</span>
                 </button>
 
+                <!-- Client Area Button -->
+                <button id="clientAreaBtn" onclick="openClientModal()"
+                    class="hidden sm:inline-flex items-center justify-center px-4 py-2.5 rounded-lg border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-900 font-medium text-sm transition-all gap-2">
+                    <i class="fa-regular fa-user text-brand-blue"></i>
+                    <span id="clientAreaLabel">Área de Cliente</span>
+                </button>
+
                 <!-- Primary CTA -->
-                <a href="#simulador" class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-brand-blue text-white font-medium text-sm hover:bg-blue-700 transition-all shadow-sm shadow-blue-500/20 active:scale-95">
+                <a href="#simulador" onclick="goToSimulator(event)"
+                    class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-brand-blue text-white font-medium text-sm hover:bg-blue-700 transition-all shadow-sm shadow-blue-500/20 active:scale-95">
                     Simular agora
                 </a>
 
                 <!-- Mobile Menu Button -->
-                <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-slate-700 dark:text-slate-200 focus:outline-none">
+                <button onclick="toggleMobileMenu()"
+                    class="md:hidden p-2 text-slate-700 dark:text-slate-200 focus:outline-none">
                     <i class="fa-solid fa-bars text-xl"></i>
                 </button>
             </div>
         </div>
 
         <!-- Mobile Menu Nav -->
-        <div id="mobileMenu" class="hidden md:hidden bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-6 py-4 space-y-3">
-            <a href="#sobre" onclick="toggleMobileMenu()" class="block text-slate-700 dark:text-slate-200 font-medium hover:text-brand-blue">Sobre</a>
-            <a href="#parques" onclick="toggleMobileMenu()" class="block text-slate-700 dark:text-slate-200 font-medium hover:text-brand-blue">Parques</a>
-            <a href="#simulador" onclick="toggleMobileMenu()" class="block text-slate-700 dark:text-slate-200 font-medium hover:text-brand-blue">Simulador AHP</a>
-            <a href="#equipa" onclick="toggleMobileMenu()" class="block text-slate-700 dark:text-slate-200 font-medium hover:text-brand-blue">Equipa</a>
-            <a href="#milestones" onclick="toggleMobileMenu()" class="block text-slate-700 dark:text-slate-200 font-medium hover:text-brand-blue">Milestones</a>
-            <a href="#simulador" onclick="toggleMobileMenu()" class="block text-center py-2 bg-brand-blue text-white rounded-lg font-medium">Simular agora</a>
+        <div id="mobileMenu"
+            class="hidden md:hidden bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-6 py-4 space-y-3">
+            <a href="#sobre" onclick="toggleMobileMenu()"
+                class="block text-slate-700 dark:text-slate-200 font-medium hover:text-brand-blue">Sobre</a>
+            <a href="#espacos" onclick="toggleMobileMenu()"
+                class="block text-slate-700 dark:text-slate-200 font-medium hover:text-brand-blue">Espaços</a>
+            <a href="#simulador" onclick="toggleMobileMenu(); goToSimulator(event);"
+                class="block text-slate-700 dark:text-slate-200 font-medium hover:text-brand-blue">Simulador AHP</a>
+            <a href="#servicos" onclick="toggleMobileMenu()"
+                class="block text-slate-700 dark:text-slate-200 font-medium hover:text-brand-blue">Consultoria</a>
+            <a href="#processo" onclick="toggleMobileMenu()"
+                class="block text-slate-700 dark:text-slate-200 font-medium hover:text-brand-blue">Critérios & App</a>
+            <button onclick="toggleMobileMenu(); openClientModal();"
+                class="w-full text-center py-2 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 rounded-lg font-medium">Área
+                de Cliente</button>
+            <a href="#simulador" onclick="toggleMobileMenu(); goToSimulator(event);"
+                class="block text-center py-2 bg-brand-blue text-white rounded-lg font-medium">Simular agora</a>
         </div>
     </header>
 
@@ -98,137 +130,178 @@
         <div class="flex items-center space-x-3 mb-8">
             <span class="h-0.5 w-10 bg-brand-blue inline-block"></span>
             <span class="text-xs sm:text-sm font-semibold uppercase tracking-widest text-slate-500 dark:text-slate-400">
-                INCUBADORA & SYSTEM ADVISORY — ISPGAYA 2026/2027
+                CONSULTORIA DE LOCALIZAÇÃO EMPRESARIAL & APOIO À DECISÃO
             </span>
         </div>
 
         <!-- Main Giant Typography Header -->
         <div class="mb-12 max-w-5xl">
-            <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-serif-title font-bold leading-[1.08] tracking-tight text-slate-900 dark:text-white">
-                Onde o <em class="italic font-serif font-normal text-brand-blue dark:text-blue-400">futuro</em> da sua <span class="font-sans font-bold">startup</span> encontra a <span class="text-slate-900 dark:text-white underline decoration-brand-blue/30 underline-offset-8">localização ideal.</span>
+            <h1
+                class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-serif-title font-bold leading-[1.08] tracking-tight text-slate-900 dark:text-white">
+                Onde o <em class="italic font-serif font-normal text-brand-blue dark:text-blue-400">crescimento</em> da
+                sua <span class="font-sans font-bold">empresa</span> encontra o <span
+                    class="text-slate-900 dark:text-white underline decoration-brand-blue/30 underline-offset-8">espaço
+                    ideal.</span>
             </h1>
         </div>
 
-        <!-- Subline & Call to Action (Grid split inspired by reference image) -->
+        <!-- Subline & Call to Action (Grid split) -->
         <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-end pt-4">
             <!-- Left: Buttons -->
             <div class="md:col-span-6 flex flex-wrap items-center gap-4">
-                <a href="#simulador" class="px-8 py-4 bg-brand-blue hover:bg-blue-700 text-white font-semibold text-base rounded-lg transition-all shadow-lg shadow-blue-500/25 flex items-center gap-3">
-                    <span>Candidatar-se à Simulação</span>
+                <button onclick="openClientModal()"
+                    class="px-8 py-4 bg-brand-blue hover:bg-blue-700 text-white font-semibold text-base rounded-lg transition-all shadow-lg shadow-blue-500/25 flex items-center gap-3">
+                    <span>Entrar na Área de Cliente</span>
                     <i class="fa-solid fa-arrow-right text-xs"></i>
-                </a>
-                <a href="#parques" class="px-8 py-4 bg-transparent hover:bg-slate-100 dark:hover:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 font-semibold text-base rounded-lg transition-all">
-                    Ver programas & parques
+                </button>
+                <a href="#espacos"
+                    class="px-8 py-4 bg-transparent hover:bg-slate-100 dark:hover:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 font-semibold text-base rounded-lg transition-all">
+                    Explorar espaços mapeados
                 </a>
             </div>
 
             <!-- Right: Explanatory paragraph on side -->
             <div class="md:col-span-6 md:pl-8">
                 <p class="text-slate-600 dark:text-slate-400 text-base md:text-lg leading-relaxed font-normal">
-                    O <strong>Nucleus (Decision Support System for Science Park Selection)</strong> acelera fundadores e decisores na escolha do Parque Tecnológico ideal. Através do método multicritério <strong>AHP</strong>, transformamos variáveis de custo, ecossistema e apoio à incubação em decisões estratégicas de alto impacto.
+                    A <strong>Nucleus</strong> presta consultoria especializada a startups à procura de incubadora e a
+                    empresas consolidadas que procuram escritórios, centros de negócios ou armazéns. Através do nosso
+                    simulador <strong>AHP</strong>, transformamos prioridades operacionais em decisões estratégicas de
+                    alto impacto.
                 </p>
             </div>
         </div>
 
         <!-- Showcase Banner / Minimal Visual Element -->
-        <div class="mt-16 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-2xl relative bg-slate-900 text-white p-8 md:p-12">
-            <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:16px_16px]"></div>
-            <div class="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-8 divide-y md:divide-y-0 md:divide-x divide-slate-800">
+        <div
+            class="mt-16 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-2xl relative bg-slate-900 text-white p-8 md:p-12">
+            <div
+                class="absolute inset-0 opacity-20 bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:16px_16px]">
+            </div>
+            <div
+                class="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-8 divide-y md:divide-y-0 md:divide-x divide-slate-800">
                 <div class="pt-4 md:pt-0">
-                    <div class="text-brand-blue font-mono text-sm uppercase mb-2 font-semibold"><i class="fa-solid fa-sliders mr-2"></i>Metodologia AHP</div>
-                    <div class="text-3xl font-bold font-serif-title mb-1">Ponderação Exata</div>
-                    <p class="text-xs text-slate-400">Avaliação hierárquica por comparação par a par para eliminar a subjetividade.</p>
+                    <div class="text-brand-blue font-mono text-sm uppercase mb-2 font-semibold"><i
+                            class="fa-solid fa-sliders mr-2"></i>Metodologia</div>
+                    <div class="text-3xl font-bold font-serif-title mb-1">Critérios Reais</div>
+                    <p class="text-xs text-slate-400">Avaliação hierárquica com escalas técnicas para eliminar a
+                        subjetividade na escolha.</p>
                 </div>
                 <div class="pt-4 md:pt-0 md:pl-8">
-                    <div class="text-brand-blue font-mono text-sm uppercase mb-2 font-semibold"><i class="fa-solid fa-chart-pie mr-2"></i>Métricas de Sucesso</div>
-                    <div class="text-3xl font-bold font-serif-title mb-1">Custos vs. Incubação</div>
-                    <p class="text-xs text-slate-400">Cálculo integrado dos custos operacionais directos e benefícios indirectos.</p>
+                    <div class="text-brand-blue font-mono text-sm uppercase mb-2 font-semibold"><i
+                            class="fa-solid fa-building mr-2"></i>Base de Dados Ativa</div>
+                    <div class="text-3xl font-bold font-serif-title mb-1">68 Espaços Mapeados</div>
+                    <p class="text-xs text-slate-400">Incubadoras, coworkings, business centers e parques empresariais
+                        no Grande Porto.</p>
                 </div>
                 <div class="pt-4 md:pt-0 md:pl-8">
-                    <div class="text-brand-blue font-mono text-sm uppercase mb-2 font-semibold"><i class="fa-solid fa-building-columns mr-2"></i>Académico ISPGAYA</div>
-                    <div class="text-3xl font-bold font-serif-title mb-1">SAD 2026/2027</div>
-                    <p class="text-xs text-slate-400">Desenvolvido na licenciatura em Engenharia Informática para casos reais.</p>
+                    <div class="text-brand-blue font-mono text-sm uppercase mb-2 font-semibold"><i
+                            class="fa-solid fa-mobile-screen-button mr-2"></i>Ecossistema Digital</div>
+                    <div class="text-3xl font-bold font-serif-title mb-1">Web + App Android</div>
+                    <p class="text-xs text-slate-400">Simule na Área de Cliente e acompanhe visitas, GPS e histórico na
+                        nossa app móvel.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SEÇÃO SOBRE O PROJETO -->
-    <section id="sobre" class="py-20 bg-slate-50 dark:bg-slate-900/50 border-y border-slate-200/60 dark:border-slate-800/80">
+    <!-- SEÇÃO SOBRE A CONSULTORIA -->
+    <section id="sobre"
+        class="py-20 bg-slate-50 dark:bg-slate-900/50 border-y border-slate-200/60 dark:border-slate-800/80">
         <div class="max-w-7xl mx-auto px-6">
             <div class="max-w-3xl mb-16">
-                <h2 class="text-xs font-bold uppercase tracking-widest text-brand-blue mb-3">Conceito do Projeto</h2>
+                <h2 class="text-xs font-bold uppercase tracking-widest text-brand-blue mb-3">Serviço de Consultoria</h2>
                 <h3 class="text-3xl sm:text-4xl font-serif-title font-bold text-slate-900 dark:text-white">
-                    Aplicação Prática em Sistemas de Apoio à Decisão e Business Intelligence
+                    Decisões de localização orientadas por dados, da startup à empresa consolidada
                 </h3>
                 <p class="mt-4 text-slate-600 dark:text-slate-400 text-lg">
-                    Escolher a localização de uma startup é uma decisão estratégica crítica. O Nucleus ajuda a responder: <em>"Qual é o melhor Parque Científico para a minha startup?"</em>, analisando infraestruturas, serviços de incubação e impacto financeiro.
+                    Escolher onde instalar uma equipa impacta os custos fixos, a retenção de talento e a operação
+                    diária. A Nucleus combina consultoria estratégica com análise matemática para responder: <em>"Qual é
+                        o melhor espaço para a minha empresa?"</em>
                 </p>
             </div>
 
             <!-- 3 Pillars Cards -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Card 1 -->
-                <div class="bg-white dark:bg-slate-800 p-8 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
-                    <div class="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 text-brand-blue rounded-lg flex items-center justify-center text-xl mb-6">
+                <div
+                    class="bg-white dark:bg-slate-800 p-8 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
+                    <div
+                        class="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 text-brand-blue rounded-lg flex items-center justify-center text-xl mb-6">
                         <i class="fa-solid fa-diagram-project"></i>
                     </div>
-                    <h4 class="text-xl font-bold mb-3 font-serif-title">Método AHP (Analytic Hierarchy Process)</h4>
+                    <h4 class="text-xl font-bold mb-3 font-serif-title">Algoritmo Multicritério AHP</h4>
                     <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-                        Estruturação do problema de decisão em árvore: Objetivo Geral &rarr; Critérios &rarr; Sub-critérios &rarr; Alternativas. Ponderação matemática rigorosa desenvolvida por Thomas Saaty.
+                        Estruturação matemática rigorosa (Analytic Hierarchy Process) que converte os pesos definidos
+                        pelo cliente em rankings normalizados e auditáveis com verificação de coerência.
                     </p>
                 </div>
 
                 <!-- Card 2 -->
-                <div class="bg-white dark:bg-slate-800 p-8 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
-                    <div class="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 text-brand-blue rounded-lg flex items-center justify-center text-xl mb-6">
-                        <i class="fa-solid fa-calculator"></i>
+                <div
+                    class="bg-white dark:bg-slate-800 p-8 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
+                    <div
+                        class="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 text-brand-blue rounded-lg flex items-center justify-center text-xl mb-6">
+                        <i class="fa-solid fa-layer-group"></i>
                     </div>
-                    <h4 class="text-xl font-bold mb-3 font-serif-title">Análise de Custos Operacionais</h4>
+                    <h4 class="text-xl font-bold mb-3 font-serif-title">Startups, Escritórios & Armazéns</h4>
                     <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-                        Estimativa do custo total de instalação, incluindo rendas por m², taxas de incubação, serviços de apoio e incentivos fiscais específicos por zona tecnológica.
+                        Cobertura transversal por tipologia: incubadoras tecnológicas, espaços de coworking, mesas
+                        individuais, escritórios virtuais, gabinetes privados e parques empresariais ou logísticos.
                     </p>
                 </div>
 
                 <!-- Card 3 -->
-                <div class="bg-white dark:bg-slate-800 p-8 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
-                    <div class="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 text-brand-blue rounded-lg flex items-center justify-center text-xl mb-6">
-                        <i class="fa-solid fa-shield-halved"></i>
+                <div
+                    class="bg-white dark:bg-slate-800 p-8 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
+                    <div
+                        class="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 text-brand-blue rounded-lg flex items-center justify-center text-xl mb-6">
+                        <i class="fa-solid fa-award"></i>
                     </div>
-                    <h4 class="text-xl font-bold mb-3 font-serif-title">Diagnóstico de Pontos Fortes e Fracos</h4>
+                    <h4 class="text-xl font-bold mb-3 font-serif-title">Apoio a Candidaturas & Custos</h4>
                     <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-                        Feedback instantâneo das fragilidades e vantagens comparativas de cada parque para a tipologia específica de negócio da startup.
+                        Identificação clara de espaços com salas de reuniões incluídas na mensalidade e de incubadoras
+                        subsidiadas acessíveis por candidatura.
                     </p>
                 </div>
             </div>
 
             <!-- AHP Hierarchy Scheme Box -->
-            <div class="mt-16 bg-white dark:bg-slate-800/80 rounded-2xl border border-slate-200 dark:border-slate-700 p-8">
+            <div
+                class="mt-16 bg-white dark:bg-slate-800/80 rounded-2xl border border-slate-200 dark:border-slate-700 p-8">
                 <h4 class="text-center font-serif-title text-xl font-bold mb-8 text-slate-900 dark:text-white">
-                    Estrutura da Árvore de Decisão AHP no Nucleus
+                    Estrutura da Árvore de Decisão AHP na Nucleus
                 </h4>
-                
+
                 <div class="flex flex-col items-center space-y-6">
                     <!-- Goal Node -->
-                    <div class="bg-emerald-600 text-white px-6 py-3 rounded-lg font-semibold text-sm shadow-md text-center">
-                        <i class="fa-solid fa-bullseye mr-2"></i>GOAL: Escolher o Parque Científico e Tecnológico Ideal
+                    <div
+                        class="bg-emerald-600 text-white px-6 py-3 rounded-lg font-semibold text-sm shadow-md text-center">
+                        <i class="fa-solid fa-bullseye mr-2"></i>OBJETIVO: Selecionar o Espaço Empresarial ou Incubadora
+                        Ideal
                     </div>
 
                     <div class="w-0.5 h-6 bg-slate-300 dark:bg-slate-600"></div>
 
-                    <!-- Criteria Level -->
+                    <!-- Criteria Level (9 criteria grouped) -->
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 w-full">
-                        <div class="bg-amber-100 dark:bg-amber-950/60 border border-amber-300 dark:border-amber-800 text-amber-900 dark:text-amber-200 p-3 rounded-lg text-center text-xs font-semibold">
-                            Critério 1: Custos Operacionais
+                        <div
+                            class="bg-amber-100 dark:bg-amber-950/60 border border-amber-300 dark:border-amber-800 text-amber-900 dark:text-amber-200 p-3 rounded-lg text-center text-xs font-semibold">
+                            Custos & Salas<br><span class="font-normal opacity-80">Preço · Sala de Reuniões</span>
                         </div>
-                        <div class="bg-amber-100 dark:bg-amber-950/60 border border-amber-300 dark:border-amber-800 text-amber-900 dark:text-amber-200 p-3 rounded-lg text-center text-xs font-semibold">
-                            Critério 2: Suporte & Incubação
+                        <div
+                            class="bg-amber-100 dark:bg-amber-950/60 border border-amber-300 dark:border-amber-800 text-amber-900 dark:text-amber-200 p-3 rounded-lg text-center text-xs font-semibold">
+                            Mobilidade (Escala 1–4)<br><span class="font-normal opacity-80">Estacionamento ·
+                                Transportes</span>
                         </div>
-                        <div class="bg-amber-100 dark:bg-amber-950/60 border border-amber-300 dark:border-amber-800 text-amber-900 dark:text-amber-200 p-3 rounded-lg text-center text-xs font-semibold">
-                            Critério 3: Acessibilidade & Local
+                        <div
+                            class="bg-amber-100 dark:bg-amber-950/60 border border-amber-300 dark:border-amber-800 text-amber-900 dark:text-amber-200 p-3 rounded-lg text-center text-xs font-semibold">
+                            Serviços & Infraestrutura<br><span class="font-normal opacity-80">Recepcionista · WiFi ·
+                                AC</span>
                         </div>
-                        <div class="bg-amber-100 dark:bg-amber-950/60 border border-amber-300 dark:border-amber-800 text-amber-900 dark:text-amber-200 p-3 rounded-lg text-center text-xs font-semibold">
-                            Critério 4: Networking & Ecossistema
+                        <div
+                            class="bg-amber-100 dark:bg-amber-950/60 border border-amber-300 dark:border-amber-800 text-amber-900 dark:text-amber-200 p-3 rounded-lg text-center text-xs font-semibold">
+                            Bem-Estar no Pólo<br><span class="font-normal opacity-80">Cantina/Rest (1–4) · Área
+                                Lazer</span>
                         </div>
                     </div>
 
@@ -236,17 +309,21 @@
 
                     <!-- Alternatives Level -->
                     <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 w-full">
-                        <div class="bg-blue-50 dark:bg-blue-950/50 border border-blue-200 dark:border-blue-800 text-blue-900 dark:text-blue-300 p-2.5 rounded text-center text-xs font-medium">
-                            UPTEC (Porto)
+                        <div
+                            class="bg-blue-50 dark:bg-blue-950/50 border border-blue-200 dark:border-blue-800 text-blue-900 dark:text-blue-300 p-2.5 rounded text-center text-xs font-medium">
+                            Incubadoras de Empresas
                         </div>
-                        <div class="bg-blue-50 dark:bg-blue-950/50 border border-blue-200 dark:border-blue-800 text-blue-900 dark:text-blue-300 p-2.5 rounded text-center text-xs font-medium">
-                            Instituto Pedro Nunes (Coimbra)
+                        <div
+                            class="bg-blue-50 dark:bg-blue-950/50 border border-blue-200 dark:border-blue-800 text-blue-900 dark:text-blue-300 p-2.5 rounded text-center text-xs font-medium">
+                            Centros de Negócios
                         </div>
-                        <div class="bg-blue-50 dark:bg-blue-950/50 border border-blue-200 dark:border-blue-800 text-blue-900 dark:text-blue-300 p-2.5 rounded text-center text-xs font-medium">
-                            TecPark / Sanjotec
+                        <div
+                            class="bg-blue-50 dark:bg-blue-950/50 border border-blue-200 dark:border-blue-800 text-blue-900 dark:text-blue-300 p-2.5 rounded text-center text-xs font-medium">
+                            Coworking Flexível & Boutique
                         </div>
-                        <div class="bg-blue-50 dark:bg-blue-950/50 border border-blue-200 dark:border-blue-800 text-blue-900 dark:text-blue-300 p-2.5 rounded text-center text-xs font-medium">
-                            Parkurbis (Covilhã)
+                        <div
+                            class="bg-blue-50 dark:bg-blue-950/50 border border-blue-200 dark:border-blue-800 text-blue-900 dark:text-blue-300 p-2.5 rounded text-center text-xs font-medium">
+                            Parques Empresariais & Logística
                         </div>
                     </div>
                 </div>
@@ -254,478 +331,636 @@
         </div>
     </section>
 
-    <!-- DIRETÓRIO DE PARQUES CIENTÍFICOS -->
-    <section id="parques" class="py-20 max-w-7xl mx-auto px-6">
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+    <!-- DIRETÓRIO DE ESPAÇOS EMPRESARIAIS -->
+    <section id="espacos" class="py-20 max-w-7xl mx-auto px-6">
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-12 gap-6">
             <div>
-                <h2 class="text-xs font-bold uppercase tracking-widest text-brand-blue mb-2">Base de Dados & Pesquisa</h2>
+                <h2 class="text-xs font-bold uppercase tracking-widest text-brand-blue mb-2">Portfólio & Base de Dados
+                </h2>
                 <h3 class="text-3xl sm:text-4xl font-serif-title font-bold text-slate-900 dark:text-white">
-                    Parques Científicos Mapeados
+                    Espaços Empresariais Mapeados
                 </h3>
+                <p id="spacesCountLabel" class="text-sm text-slate-500 dark:text-slate-400 mt-2">
+                    A carregar catálogo completo...
+                </p>
             </div>
-            
+
             <!-- Search & Filter Controls -->
             <div class="flex flex-wrap items-center gap-3">
                 <div class="relative w-full sm:w-64">
                     <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-slate-400 text-sm"></i>
-                    <input type="text" id="searchInput" oninput="filterParks()" placeholder="Pesquisar parque ou cidade..." class="w-full pl-10 pr-4 py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-blue">
+                    <input type="text" id="searchInput" oninput="filterSpaces()"
+                        placeholder="Pesquisar espaço, rua ou zona..."
+                        class="w-full pl-10 pr-4 py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-blue">
                 </div>
-                
-                <select id="regionFilter" onchange="filterParks()" class="py-2.5 px-4 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-blue text-slate-700 dark:text-slate-300">
-                    <option value="all">Todas as Regiões</option>
-                    <option value="norte">Norte</option>
-                    <option value="centro">Centro</option>
-                    <option value="sul">Sul e Ilhas</option>
+
+                <select id="regionFilter" onchange="filterSpaces()"
+                    class="py-2.5 px-4 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-blue text-slate-700 dark:text-slate-300">
+                    <option value="all">Todas as Localizações</option>
+                    <option value="Porto">Porto</option>
+                    <option value="Vila Nova de Gaia">Vila Nova de Gaia</option>
+                    <option value="Matosinhos">Matosinhos</option>
+                    <option value="Maia">Maia</option>
+                    <option value="Gondomar">Gondomar</option>
+                    <option value="S. Félix da Marinha">S. Félix da Marinha</option>
+                </select>
+
+                <select id="typeFilter" onchange="filterSpaces()"
+                    class="py-2.5 px-4 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-blue text-slate-700 dark:text-slate-300">
+                    <option value="all">Todas as Tipologias</option>
+                    <option value="Incubadoras de Empresas">Incubadoras de Empresas</option>
+                    <option value="Parques Empresariais e Tecnológicos">Parques Empresariais e Tecnológicos</option>
+                    <option value="Centros de Negócios (Business Centers / Corporate)">Centros de Negócios</option>
+                    <option value="Coworking Flexível / Hubs Comunitários">Coworking Flexível / Hubs</option>
+                    <option value="Boutique Coworking space">Boutique Coworking</option>
+                    <option value="Serviços empresariais multimédia">Serviços Empresariais Multimédia</option>
                 </select>
             </div>
         </div>
 
-        <!-- Science Parks Cards Grid -->
-        <div id="parksGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Park Card 1 -->
-            <div class="park-card bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:border-brand-blue/50 transition-all flex flex-col" data-region="norte" data-name="uptec porto">
-                <div class="p-6 flex-1">
-                    <div class="flex items-start justify-between mb-4">
-                        <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-100 dark:bg-blue-900/40 text-brand-blue">Norte • Porto</span>
-                        <span class="text-xs font-mono text-emerald-600 dark:text-emerald-400 font-medium"><i class="fa-solid fa-euro-sign"></i> Moderado</span>
-                    </div>
-                    <h4 class="text-xl font-bold font-serif-title mb-2 text-slate-900 dark:text-white">UPTEC</h4>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">Parque de Ciência e Tecnologia da Universidade do Porto</p>
-                    <p class="text-sm text-slate-600 dark:text-slate-300 mb-4">
-                        Apoio ao surgimento de projetos empresariais nas áreas de tecnologia, indústrias criativas e biotecnologia.
-                    </p>
-                    <div class="flex flex-wrap gap-1.5 mb-4">
-                        <span class="text-[11px] px-2 py-0.5 bg-slate-100 dark:bg-slate-800 rounded text-slate-600 dark:text-slate-400">Mentorias</span>
-                        <span class="text-[11px] px-2 py-0.5 bg-slate-100 dark:bg-slate-800 rounded text-slate-600 dark:text-slate-400">Laboratórios</span>
-                        <span class="text-[11px] px-2 py-0.5 bg-slate-100 dark:bg-slate-800 rounded text-slate-600 dark:text-slate-400">Acesso VCs</span>
-                    </div>
-                </div>
-                <div class="px-6 py-4 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center text-xs">
-                    <span class="text-slate-500">AHP Index: <strong class="text-slate-800 dark:text-slate-200">0.92</strong></span>
-                    <button onclick="selectParkInSim('UPTEC')" class="text-brand-blue hover:underline font-semibold">Testar no Simulador &rarr;</button>
-                </div>
-            </div>
+        <!-- Spaces Cards Grid (populated dynamically from EMPRESAS_DATA) -->
+        <div id="spacesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Rendered by script.js -->
+        </div>
 
-            <!-- Park Card 2 -->
-            <div class="park-card bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:border-brand-blue/50 transition-all flex flex-col" data-region="centro" data-name="ipn coimbra instituto pedro nunes">
-                <div class="p-6 flex-1">
-                    <div class="flex items-start justify-between mb-4">
-                        <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300">Centro • Coimbra</span>
-                        <span class="text-xs font-mono text-emerald-600 dark:text-emerald-400 font-medium"><i class="fa-solid fa-euro-sign"></i> Competitivo</span>
-                    </div>
-                    <h4 class="text-xl font-bold font-serif-title mb-2 text-slate-900 dark:text-white">Instituto Pedro Nunes (IPN)</h4>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">Associação para a Inovação e Desenvolvimento em Ciência e Tecnologia</p>
-                    <p class="text-sm text-slate-600 dark:text-slate-300 mb-4">
-                        Eleita repetidamente a melhor incubadora de base tecnológica do mundo. Forte ecossistema com R&D e acelerador ESA.
-                    </p>
-                    <div class="flex flex-wrap gap-1.5 mb-4">
-                        <span class="text-[11px] px-2 py-0.5 bg-slate-100 dark:bg-slate-800 rounded text-slate-600 dark:text-slate-400">ESA BIC</span>
-                        <span class="text-[11px] px-2 py-0.5 bg-slate-100 dark:bg-slate-800 rounded text-slate-600 dark:text-slate-400">Prototipagem</span>
-                        <span class="text-[11px] px-2 py-0.5 bg-slate-100 dark:bg-slate-800 rounded text-slate-600 dark:text-slate-400">Patentes</span>
-                    </div>
-                </div>
-                <div class="px-6 py-4 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center text-xs">
-                    <span class="text-slate-500">AHP Index: <strong class="text-slate-800 dark:text-slate-200">0.89</strong></span>
-                    <button onclick="selectParkInSim('IPN')" class="text-brand-blue hover:underline font-semibold">Testar no Simulador &rarr;</button>
-                </div>
-            </div>
-
-            <!-- Park Card 3 -->
-            <div class="park-card bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:border-brand-blue/50 transition-all flex flex-col" data-region="norte" data-name="tecpark sanjotec aveiro regiao">
-                <div class="p-6 flex-1">
-                    <div class="flex items-start justify-between mb-4">
-                        <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-100 dark:bg-blue-900/40 text-brand-blue">Norte • S. João da Madeira</span>
-                        <span class="text-xs font-mono text-emerald-600 dark:text-emerald-400 font-medium"><i class="fa-solid fa-euro-sign"></i> Económico</span>
-                    </div>
-                    <h4 class="text-xl font-bold font-serif-title mb-2 text-slate-900 dark:text-white">TecPark / Sanjotec</h4>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">Centro Empresarial e Tecnológico</p>
-                    <p class="text-sm text-slate-600 dark:text-slate-300 mb-4">
-                        Especializado na transição digital de indústrias tradicionais, automação, robótica e custos fixos extremamente baixos.
-                    </p>
-                    <div class="flex flex-wrap gap-1.5 mb-4">
-                        <span class="text-[11px] px-2 py-0.5 bg-slate-100 dark:bg-slate-800 rounded text-slate-600 dark:text-slate-400">Baixo Custo</span>
-                        <span class="text-[11px] px-2 py-0.5 bg-slate-100 dark:bg-slate-800 rounded text-slate-600 dark:text-slate-400">FabLab</span>
-                        <span class="text-[11px] px-2 py-0.5 bg-slate-100 dark:bg-slate-800 rounded text-slate-600 dark:text-slate-400">Parque Industrial</span>
-                    </div>
-                </div>
-                <div class="px-6 py-4 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center text-xs">
-                    <span class="text-slate-500">AHP Index: <strong class="text-slate-800 dark:text-slate-200">0.85</strong></span>
-                    <button onclick="selectParkInSim('TecPark')" class="text-brand-blue hover:underline font-semibold">Testar no Simulador &rarr;</button>
-                </div>
-            </div>
-
-            <!-- Park Card 4 -->
-            <div class="park-card bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:border-brand-blue/50 transition-all flex flex-col" data-region="centro" data-name="parkurbis covilha interior">
-                <div class="p-6 flex-1">
-                    <div class="flex items-start justify-between mb-4">
-                        <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300">Centro • Covilhã</span>
-                        <span class="text-xs font-mono text-emerald-600 dark:text-emerald-400 font-medium"><i class="fa-solid fa-euro-sign"></i> Mto Económico</span>
-                    </div>
-                    <h4 class="text-xl font-bold font-serif-title mb-2 text-slate-900 dark:text-white">Parkurbis</h4>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">Parque de Ciência e Tecnologia da Covilhã</p>
-                    <p class="text-sm text-slate-600 dark:text-slate-300 mb-4">
-                        Proximidade à Universidade da Beira Interior (UBI). Excelente para startups de TI e telecomunicações buscando apoio regional.
-                    </p>
-                    <div class="flex flex-wrap gap-1.5 mb-4">
-                        <span class="text-[11px] px-2 py-0.5 bg-slate-100 dark:bg-slate-800 rounded text-slate-600 dark:text-slate-400">Incentivos Fiscais</span>
-                        <span class="text-[11px] px-2 py-0.5 bg-slate-100 dark:bg-slate-800 rounded text-slate-600 dark:text-slate-400">Ligação UBI</span>
-                    </div>
-                </div>
-                <div class="px-6 py-4 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center text-xs">
-                    <span class="text-slate-500">AHP Index: <strong class="text-slate-800 dark:text-slate-200">0.81</strong></span>
-                    <button onclick="selectParkInSim('Parkurbis')" class="text-brand-blue hover:underline font-semibold">Testar no Simulador &rarr;</button>
-                </div>
-            </div>
-
-            <!-- Park Card 5 -->
-            <div class="park-card bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:border-brand-blue/50 transition-all flex flex-col" data-region="sul" data-name="lispolis lisboa taguspark sul">
-                <div class="p-6 flex-1">
-                    <div class="flex items-start justify-between mb-4">
-                        <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300">Sul • Lisboa</span>
-                        <span class="text-xs font-mono text-amber-600 font-medium"><i class="fa-solid fa-euro-sign"></i> Premium</span>
-                    </div>
-                    <h4 class="text-xl font-bold font-serif-title mb-2 text-slate-900 dark:text-white">LISPOLIS / Taguspark</h4>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">Pólo Tecnológico de Lisboa</p>
-                    <p class="text-sm text-slate-600 dark:text-slate-300 mb-4">
-                        Elevada densidade de investidores e acesso privilegiado ao ecossistema da capital e multinacionais parceiras.
-                    </p>
-                    <div class="flex flex-wrap gap-1.5 mb-4">
-                        <span class="text-[11px] px-2 py-0.5 bg-slate-100 dark:bg-slate-800 rounded text-slate-600 dark:text-slate-400">Networking Top</span>
-                        <span class="text-[11px] px-2 py-0.5 bg-slate-100 dark:bg-slate-800 rounded text-slate-600 dark:text-slate-400">Capital Risco</span>
-                    </div>
-                </div>
-                <div class="px-6 py-4 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center text-xs">
-                    <span class="text-slate-500">AHP Index: <strong class="text-slate-800 dark:text-slate-200">0.88</strong></span>
-                    <button onclick="selectParkInSim('LISPOLIS')" class="text-brand-blue hover:underline font-semibold">Testar no Simulador &rarr;</button>
-                </div>
-            </div>
-
-            <!-- Park Card 6 -->
-            <div class="park-card bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:border-brand-blue/50 transition-all flex flex-col" data-region="centro" data-name="aveiro incuba ua incubator">
-                <div class="p-6 flex-1">
-                    <div class="flex items-start justify-between mb-4">
-                        <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300">Centro • Aveiro</span>
-                        <span class="text-xs font-mono text-emerald-600 font-medium"><i class="fa-solid fa-euro-sign"></i> Moderado</span>
-                    </div>
-                    <h4 class="text-xl font-bold font-serif-title mb-2 text-slate-900 dark:text-white">Incubadora UA (Aveiro)</h4>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">Universidade de Aveiro Incubator</p>
-                    <p class="text-sm text-slate-600 dark:text-slate-300 mb-4">
-                        Reforço em Telecomunicações, Software, Nanotecnologia e ligação direta aos laboratórios de investigação da UA.
-                    </p>
-                    <div class="flex flex-wrap gap-1.5 mb-4">
-                        <span class="text-[11px] px-2 py-0.5 bg-slate-100 dark:bg-slate-800 rounded text-slate-600 dark:text-slate-400">5G / IoT Labs</span>
-                        <span class="text-[11px] px-2 py-0.5 bg-slate-100 dark:bg-slate-800 rounded text-slate-600 dark:text-slate-400">Spin-offs</span>
-                    </div>
-                </div>
-                <div class="px-6 py-4 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center text-xs">
-                    <span class="text-slate-500">AHP Index: <strong class="text-slate-800 dark:text-slate-200">0.86</strong></span>
-                    <button onclick="selectParkInSim('UA')" class="text-brand-blue hover:underline font-semibold">Testar no Simulador &rarr;</button>
-                </div>
-            </div>
+        <!-- Show More / Less Button -->
+        <div class="mt-10 text-center">
+            <button id="toggleShowAllSpacesBtn" onclick="toggleShowAllSpaces()"
+                class="px-6 py-3 rounded-lg border border-slate-300 dark:border-slate-700 text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-900 transition-colors">
+                Ver todos os espaços
+            </button>
         </div>
     </section>
 
     <!-- SIMULADOR AHP INTERATIVO -->
     <section id="simulador" class="py-20 bg-slate-900 text-white relative">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="max-w-3xl mb-12">
-                <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-brand-blue text-xs font-semibold uppercase tracking-wider mb-4">
-                    <i class="fa-solid fa-microchip"></i> Engine AHP em Tempo Real
+            <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10">
+                <div class="max-w-3xl">
+                    <div
+                        class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-brand-blue text-xs font-semibold uppercase tracking-wider mb-4">
+                        <i class="fa-solid fa-microchip"></i> Área de Cliente • AHP Engine
+                    </div>
+                    <h2 class="text-3xl sm:text-5xl font-serif-title font-bold text-white mb-4">
+                        Simulador de Escolha de Espaço
+                    </h2>
+                    <p class="text-slate-400 text-base sm:text-lg">
+                        Selecione a modalidade e filtros pretendidos e atribua a importância a cada um dos
+                        critérios. O motor AHP encontra o espaço indicado para si ou a sua empresa.
+                    </p>
                 </div>
-                <h2 class="text-3xl sm:text-5xl font-serif-title font-bold text-white mb-4">
-                    Simulador Multicritério AHP (Requisito RF6)
-                </h2>
-                <p class="text-slate-400 text-base sm:text-lg">
-                    Ajuste a importância relativa de cada critério para a sua startup. O algoritmo calcula a matriz normalizada de pesos e classifica as melhores alternativas com análise de custos operacionais.
-                </p>
+
+                <!-- Client Session Status Pill -->
+                <div id="simClientBanner"
+                    class="bg-slate-800/90 border border-slate-700 rounded-xl px-4 py-3 flex items-center gap-3 shrink-0">
+                    <!-- Updated dynamically by script.js -->
+                </div>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-                <!-- Controls Side (Left) -->
-                <div class="lg:col-span-6 bg-slate-800/80 backdrop-blur-sm p-6 sm:p-8 rounded-2xl border border-slate-700 shadow-xl space-y-6">
-                    <h3 class="text-lg font-bold font-serif-title border-b border-slate-700 pb-3 flex justify-between items-center">
-                        <span>Ponderação dos Critérios</span>
-                        <span class="text-xs font-mono font-normal text-blue-400">Total: 100%</span>
+            <div id="simulatorLockedGate"
+                class="bg-slate-800/70 backdrop-blur-sm border border-slate-700 rounded-2xl p-8 sm:p-12 text-center max-w-3xl mx-auto space-y-5 shadow-xl">
+                <div
+                    class="w-16 h-16 mx-auto rounded-2xl bg-blue-500/15 border border-blue-500/30 text-brand-blue flex items-center justify-center text-2xl">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+                <div class="space-y-2">
+                    <span
+                        class="inline-block text-[11px] font-mono uppercase tracking-widest text-blue-400 font-semibold">
+                        Acesso Exclusivo a Clientes Registados
+                    </span>
+                    <h3 class="text-2xl sm:text-3xl font-serif-title font-bold text-white">
+                        Entre na sua Área de Cliente para aceder ao Simulador AHP
                     </h3>
-
-                    <!-- Criterion Slider 1 -->
-                    <div>
-                        <div class="flex justify-between items-center text-sm font-medium mb-2">
-                            <label for="wCosts" class="text-slate-200 flex items-center gap-2">
-                                <i class="fa-solid fa-wallet text-amber-400"></i> Custos Operacionais (Renda/m², Taxas)
-                            </label>
-                            <span id="valCosts" class="font-mono text-brand-blue font-bold">35%</span>
-                        </div>
-                        <input type="range" id="wCosts" min="5" max="70" value="35" oninput="runAHPSimulation()" class="w-full accent-brand-blue cursor-pointer bg-slate-700 rounded-lg h-2">
-                    </div>
-
-                    <!-- Criterion Slider 2 -->
-                    <div>
-                        <div class="flex justify-between items-center text-sm font-medium mb-2">
-                            <label for="wIncubation" class="text-slate-200 flex items-center gap-2">
-                                <i class="fa-solid fa-rocket text-emerald-400"></i> Suporte de Incubação & Mentorias
-                            </label>
-                            <span id="valIncubation" class="font-mono text-brand-blue font-bold">30%</span>
-                        </div>
-                        <input type="range" id="wIncubation" min="5" max="70" value="30" oninput="runAHPSimulation()" class="w-full accent-brand-blue cursor-pointer bg-slate-700 rounded-lg h-2">
-                    </div>
-
-                    <!-- Criterion Slider 3 -->
-                    <div>
-                        <div class="flex justify-between items-center text-sm font-medium mb-2">
-                            <label for="wAccess" class="text-slate-200 flex items-center gap-2">
-                                <i class="fa-solid fa-location-dot text-purple-400"></i> Acessibilidade & Localização
-                            </label>
-                            <span id="valAccess" class="font-mono text-brand-blue font-bold">20%</span>
-                        </div>
-                        <input type="range" id="wAccess" min="5" max="70" value="20" oninput="runAHPSimulation()" class="w-full accent-brand-blue cursor-pointer bg-slate-700 rounded-lg h-2">
-                    </div>
-
-                    <!-- Criterion Slider 4 -->
-                    <div>
-                        <div class="flex justify-between items-center text-sm font-medium mb-2">
-                            <label for="wNetworking" class="text-slate-200 flex items-center gap-2">
-                                <i class="fa-solid fa-network-wired text-cyan-400"></i> Ecossistema & VCs
-                            </label>
-                            <span id="valNetworking" class="font-mono text-brand-blue font-bold">15%</span>
-                        </div>
-                        <input type="range" id="wNetworking" min="5" max="70" value="15" oninput="runAHPSimulation()" class="w-full accent-brand-blue cursor-pointer bg-slate-700 rounded-lg h-2">
-                    </div>
-
-                    <!-- Additional Option Checkbox -->
-                    <div class="pt-4 border-t border-slate-700/80 flex items-center justify-between">
-                        <div class="flex items-center gap-2">
-                            <input type="checkbox" id="taxExempt" onchange="runAHPSimulation()" class="rounded border-slate-600 text-brand-blue focus:ring-brand-blue">
-                            <label for="taxExempt" class="text-xs text-slate-300">Dar prioridade a benefícios fiscais municipais</label>
-                        </div>
-                        <button onclick="resetSliders()" class="text-xs text-slate-400 hover:text-white underline">Repor</button>
-                    </div>
-
-                    <!-- Action Export Button -->
-                    <button onclick="exportResults()" class="w-full py-3 bg-brand-blue hover:bg-blue-600 text-white font-semibold rounded-lg text-sm transition-all flex items-center justify-center gap-2 shadow-lg shadow-blue-500/20">
-                        <i class="fa-solid fa-file-export"></i>
-                        <span>Exportar Relatório de Simulação (RF7)</span>
+                    <p class="text-sm text-slate-400 max-w-xl mx-auto leading-relaxed">
+                        Tal como na aplicação Android Nucleus, o simulador multicritério de 9 parâmetros, o ranking
+                        personalizado e o histórico de simulações estão disponíveis apenas dentro da sua Área de
+                        Cliente.
+                    </p>
+                </div>
+                <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
+                    <button onclick="openClientModal('login', true)"
+                        class="px-6 py-3 bg-brand-blue hover:bg-blue-600 text-white font-semibold rounded-lg text-sm transition-all shadow-lg shadow-blue-500/20 flex items-center gap-2">
+                        <i class="fa-solid fa-right-to-bracket"></i>
+                        <span>Entrar na Área de Cliente</span>
+                    </button>
+                    <button onclick="openClientModal('register', true)"
+                        class="px-6 py-3 bg-slate-700 hover:bg-slate-600 text-white font-semibold rounded-lg text-sm transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-user-plus"></i>
+                        <span>Criar Conta</span>
                     </button>
                 </div>
+            </div>
 
-                <!-- Simulation Dynamic Results Output (Right) -->
-                <div class="lg:col-span-6 bg-slate-800/40 p-6 sm:p-8 rounded-2xl border border-slate-700/80 space-y-6">
-                    <div class="flex items-center justify-between">
-                        <h3 class="text-lg font-bold font-serif-title text-white">
-                            Ranking de Recomendação AHP
+            <div id="simulatorUnlockedContent" class="hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+                    <!-- Controls Side (Left) -->
+                    <div
+                        class="lg:col-span-6 bg-slate-800/80 backdrop-blur-sm p-6 sm:p-8 rounded-2xl border border-slate-700 shadow-xl space-y-5">
+                        <h3
+                            class="text-lg font-bold font-serif-title border-b border-slate-700 pb-3 flex justify-between items-center">
+                            <span>Configuração & Ponderação (1 a 9)</span>
+                            <span class="text-xs font-mono font-normal text-blue-400">Normalização AHP: 100%</span>
                         </h3>
-                        <span class="text-xs font-mono px-2.5 py-1 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-full font-semibold">
-                            Coerência CR &lt; 0.10 &check;
-                        </span>
+
+                        <!-- Filters inside Simulator -->
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pb-2 border-b border-slate-700/70">
+                            <div>
+                                <label for="simModalidade"
+                                    class="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">Modalidade</label>
+                                <select id="simModalidade" onchange="runAHPSimulation()"
+                                    class="w-full py-2 px-2.5 bg-slate-900 border border-slate-700 rounded-lg text-xs text-white focus:outline-none focus:ring-2 focus:ring-brand-blue">
+                                    <option value="Cowork">Cowork</option>
+                                    <option value="Mesa individual">Mesa Individual</option>
+                                    <option value="Privado">Escritório Privado</option>
+                                    <option value="Escritório Virtual">Escritório Virtual</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="simLocalizacao"
+                                    class="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">Localização</label>
+                                <select id="simLocalizacao" onchange="runAHPSimulation()"
+                                    class="w-full py-2 px-2.5 bg-slate-900 border border-slate-700 rounded-lg text-xs text-white focus:outline-none focus:ring-2 focus:ring-brand-blue">
+                                    <option value="Todas">Todas</option>
+                                    <option value="Porto">Porto</option>
+                                    <option value="Vila Nova de Gaia">Vila Nova de Gaia</option>
+                                    <option value="Matosinhos">Matosinhos</option>
+                                    <option value="Maia">Maia</option>
+                                    <option value="Gondomar">Gondomar</option>
+                                    <option value="S. Félix da Marinha">S. Félix da Marinha</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="simTipologia"
+                                    class="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">Tipologia</label>
+                                <select id="simTipologia" onchange="runAHPSimulation()"
+                                    class="w-full py-2 px-2.5 bg-slate-900 border border-slate-700 rounded-lg text-xs text-white focus:outline-none focus:ring-2 focus:ring-brand-blue">
+                                    <option value="Todas">Todas</option>
+                                    <option value="Incubadoras de Empresas">Incubadoras</option>
+                                    <option value="Parques Empresariais e Tecnológicos">Parques Empresariais</option>
+                                    <option value="Centros de Negócios (Business Centers / Corporate)">Centros de
+                                        Negócios
+                                    </option>
+                                    <option value="Coworking Flexível / Hubs Comunitários">Coworking Flexível</option>
+                                    <option value="Boutique Coworking space">Boutique Coworking</option>
+                                    <option value="Serviços empresariais multimédia">Multimédia</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- 9 Criteria Sliders -->
+                        <div class="space-y-4 max-h-[470px] overflow-y-auto pr-1">
+                            <!-- 1. RECEPCIONISTA -->
+                            <div>
+                                <div class="flex justify-between items-center text-xs sm:text-sm font-medium mb-1">
+                                    <label for="w_rec" class="text-slate-200 flex items-center gap-2">
+                                        <i class="fa-solid fa-headset text-sky-400 w-4 text-center"></i> 1.
+                                        Recepcionista
+                                        <span class="text-[11px] text-slate-400 font-normal">(Tem/Não tem)</span>
+                                    </label>
+                                    <span id="val_rec" class="font-mono text-brand-blue font-bold text-xs">5
+                                        (11%)</span>
+                                </div>
+                                <input type="range" id="w_rec" min="1" max="9" value="5" oninput="runAHPSimulation()"
+                                    class="w-full accent-brand-blue cursor-pointer bg-slate-700 rounded-lg h-1.5">
+                            </div>
+
+                            <!-- 2. WiFi -->
+                            <div>
+                                <div class="flex justify-between items-center text-xs sm:text-sm font-medium mb-1">
+                                    <label for="w_wifi" class="text-slate-200 flex items-center gap-2">
+                                        <i class="fa-solid fa-wifi text-emerald-400 w-4 text-center"></i> 2. WiFi <span
+                                            class="text-[11px] text-slate-400 font-normal">(Tem/Não tem)</span>
+                                    </label>
+                                    <span id="val_wifi" class="font-mono text-brand-blue font-bold text-xs">7
+                                        (16%)</span>
+                                </div>
+                                <input type="range" id="w_wifi" min="1" max="9" value="7" oninput="runAHPSimulation()"
+                                    class="w-full accent-brand-blue cursor-pointer bg-slate-700 rounded-lg h-1.5">
+                            </div>
+
+                            <!-- 3. SALA DE REUNIOES -->
+                            <div>
+                                <div class="flex justify-between items-center text-xs sm:text-sm font-medium mb-1">
+                                    <label for="w_reunioes" class="text-slate-200 flex items-center gap-2">
+                                        <i class="fa-solid fa-users-rectangle text-indigo-400 w-4 text-center"></i> 3.
+                                        Sala
+                                        de Reuniões <span class="text-[11px] text-slate-400 font-normal">(€/h)</span>
+                                    </label>
+                                    <span id="val_reunioes" class="font-mono text-brand-blue font-bold text-xs">6
+                                        (13%)</span>
+                                </div>
+                                <input type="range" id="w_reunioes" min="1" max="9" value="6"
+                                    oninput="runAHPSimulation()"
+                                    class="w-full accent-brand-blue cursor-pointer bg-slate-700 rounded-lg h-1.5">
+                            </div>
+
+                            <!-- 4. ESTACIONAMENTO -->
+                            <div>
+                                <div class="flex justify-between items-center text-xs sm:text-sm font-medium mb-1">
+                                    <label for="w_est" class="text-slate-200 flex items-center gap-2">
+                                        <i class="fa-solid fa-square-parking text-amber-400 w-4 text-center"></i> 4.
+                                        Estacionamento <span class="text-[11px] text-slate-400 font-normal">(Escala 1 a
+                                            4)</span>
+                                    </label>
+                                    <span id="val_est" class="font-mono text-brand-blue font-bold text-xs">5
+                                        (11%)</span>
+                                </div>
+                                <input type="range" id="w_est" min="1" max="9" value="5" oninput="runAHPSimulation()"
+                                    class="w-full accent-brand-blue cursor-pointer bg-slate-700 rounded-lg h-1.5">
+                            </div>
+
+                            <!-- 5. TRANSPORTES -->
+                            <div>
+                                <div class="flex justify-between items-center text-xs sm:text-sm font-medium mb-1">
+                                    <label for="w_trans" class="text-slate-200 flex items-center gap-2">
+                                        <i class="fa-solid fa-train-subway text-purple-400 w-4 text-center"></i> 5.
+                                        Transportes <span class="text-[11px] text-slate-400 font-normal">(Escala 1 a
+                                            4)</span>
+                                    </label>
+                                    <span id="val_trans" class="font-mono text-brand-blue font-bold text-xs">6
+                                        (13%)</span>
+                                </div>
+                                <input type="range" id="w_trans" min="1" max="9" value="6" oninput="runAHPSimulation()"
+                                    class="w-full accent-brand-blue cursor-pointer bg-slate-700 rounded-lg h-1.5">
+                            </div>
+
+                            <!-- 6. CANTINA/REST -->
+                            <div>
+                                <div class="flex justify-between items-center text-xs sm:text-sm font-medium mb-1">
+                                    <label for="w_cantina" class="text-slate-200 flex items-center gap-2">
+                                        <i class="fa-solid fa-utensils text-orange-400 w-4 text-center"></i> 6. Cantina
+                                        /
+                                        Rest. <span class="text-[11px] text-slate-400 font-normal">(Escala 1 a 4)</span>
+                                    </label>
+                                    <span id="val_cantina" class="font-mono text-brand-blue font-bold text-xs">4
+                                        (9%)</span>
+                                </div>
+                                <input type="range" id="w_cantina" min="1" max="9" value="4"
+                                    oninput="runAHPSimulation()"
+                                    class="w-full accent-brand-blue cursor-pointer bg-slate-700 rounded-lg h-1.5">
+                            </div>
+
+                            <!-- 7. AREA DE LAZER -->
+                            <div>
+                                <div class="flex justify-between items-center text-xs sm:text-sm font-medium mb-1">
+                                    <label for="w_lazer" class="text-slate-200 flex items-center gap-2">
+                                        <i class="fa-solid fa-couch text-pink-400 w-4 text-center"></i> 7. Área de Lazer
+                                        <span class="text-[11px] text-slate-400 font-normal">(Tem/Não tem)</span>
+                                    </label>
+                                    <span id="val_lazer" class="font-mono text-brand-blue font-bold text-xs">3
+                                        (7%)</span>
+                                </div>
+                                <input type="range" id="w_lazer" min="1" max="9" value="3" oninput="runAHPSimulation()"
+                                    class="w-full accent-brand-blue cursor-pointer bg-slate-700 rounded-lg h-1.5">
+                            </div>
+
+                            <!-- 8. AC -->
+                            <div>
+                                <div class="flex justify-between items-center text-xs sm:text-sm font-medium mb-1">
+                                    <label for="w_ac" class="text-slate-200 flex items-center gap-2">
+                                        <i class="fa-solid fa-snowflake text-cyan-400 w-4 text-center"></i> 8. Ar
+                                        Condicionado (AC) <span class="text-[11px] text-slate-400 font-normal">(Tem/Não
+                                            tem)</span>
+                                    </label>
+                                    <span id="val_ac" class="font-mono text-brand-blue font-bold text-xs">4 (9%)</span>
+                                </div>
+                                <input type="range" id="w_ac" min="1" max="9" value="4" oninput="runAHPSimulation()"
+                                    class="w-full accent-brand-blue cursor-pointer bg-slate-700 rounded-lg h-1.5">
+                            </div>
+
+                            <!-- 9. PREÇO -->
+                            <div>
+                                <div class="flex justify-between items-center text-xs sm:text-sm font-medium mb-1">
+                                    <label for="w_preco" class="text-slate-200 flex items-center gap-2">
+                                        <i class="fa-solid fa-euro-sign text-emerald-400 w-4 text-center"></i> 9. Preço
+                                        Mensalidade
+                                    </label>
+                                    <span id="val_preco" class="font-mono text-brand-blue font-bold text-xs">8
+                                        (18%)</span>
+                                </div>
+                                <input type="range" id="w_preco" min="1" max="9" value="8" oninput="runAHPSimulation()"
+                                    class="w-full accent-brand-blue cursor-pointer bg-slate-700 rounded-lg h-1.5">
+                            </div>
+                        </div>
+
+                        <!-- Additional Option Checkbox -->
+                        <div
+                            class="pt-4 border-t border-slate-700/80 flex flex-wrap items-center justify-between gap-2">
+                            <div class="flex items-center gap-2">
+                                <input type="checkbox" id="includeSubsidized" checked onchange="runAHPSimulation()"
+                                    class="rounded border-slate-600 text-brand-blue focus:ring-brand-blue">
+                                <label for="includeSubsidized" class="text-xs text-slate-300">Incluir espaços
+                                    subsidiados
+                                    por candidatura</label>
+                            </div>
+                            <button onclick="resetSliders()"
+                                class="text-xs text-slate-400 hover:text-white underline">Repor
+                                pesos</button>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <button onclick="saveSimulationToHistory()"
+                                class="w-full py-3 bg-slate-700 hover:bg-slate-600 text-white font-semibold rounded-lg text-sm transition-all flex items-center justify-center gap-2">
+                                <i class="fa-regular fa-bookmark"></i>
+                                <span>Guardar na Área de Cliente</span>
+                            </button>
+                            <button onclick="exportResults()"
+                                class="w-full py-3 bg-brand-blue hover:bg-blue-600 text-white font-semibold rounded-lg text-sm transition-all flex items-center justify-center gap-2 shadow-lg shadow-blue-500/20">
+                                <i class="fa-solid fa-file-export"></i>
+                                <span>Exportar Relatório AHP</span>
+                            </button>
+                        </div>
                     </div>
 
-                    <!-- Dynamic Bars Container -->
-                    <div id="ahpResultsContainer" class="space-y-4">
-                        <!-- Content generated dynamically by JS -->
-                    </div>
+                    <!-- Simulation Dynamic Results Output (Right) -->
+                    <div
+                        class="lg:col-span-6 bg-slate-800/40 p-6 sm:p-8 rounded-2xl border border-slate-700/80 space-y-6">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <div>
+                                <h3 class="text-lg font-bold font-serif-title text-white">
+                                    Ranking de Recomendação AHP
+                                </h3>
+                                <p id="simEvaluatedCount" class="text-xs text-slate-400">A analisar alternativas...</p>
+                            </div>
+                            <span id="crBadge"
+                                class="text-xs font-mono px-2.5 py-1 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-full font-semibold">
+                                Coerência CR = 0.000 &check;
+                            </span>
+                        </div>
 
-                    <!-- Strong and Weak Points Box for Winning Alternative -->
-                    <div id="winnerAnalysisBox" class="p-5 rounded-xl bg-slate-900 border border-slate-700 space-y-3">
-                        <!-- JS injected details -->
+                        <!-- Dynamic Bars Container -->
+                        <div id="ahpResultsContainer" class="space-y-4">
+                            <!-- Content generated dynamically by JS -->
+                        </div>
+
+                        <!-- Strong and Weak Points Box for Winning Alternative -->
+                        <div id="winnerAnalysisBox"
+                            class="p-5 rounded-xl bg-slate-900 border border-slate-700 space-y-3">
+                            <!-- JS injected details -->
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- EQUIPA & PAPÉIS DO PROJETO -->
-    <section id="equipa" class="py-20 max-w-7xl mx-auto px-6">
+    <!-- CONSULTORIA & SOLUÇÕES -->
+    <section id="servicos" class="py-20 max-w-7xl mx-auto px-6">
         <div class="max-w-3xl mb-16">
-            <h2 class="text-xs font-bold uppercase tracking-widest text-brand-blue mb-2">Estrutura Organizacional</h2>
+            <h2 class="text-xs font-bold uppercase tracking-widest text-brand-blue mb-2">Áreas de Atuação</h2>
             <h3 class="text-3xl sm:text-4xl font-serif-title font-bold text-slate-900 dark:text-white">
-                Equipa de Desenvolvimento (ISPGAYA)
+                Consultoria Integrada & Tecnologia de Apoio
             </h3>
             <p class="mt-4 text-slate-600 dark:text-slate-400 text-base">
-                Conforme definido nas diretrizes da unidade curricular de Sistemas de Apoio à Decisão, a equipa organiza-se em 4 papéis chave de engenharia de software:
+                Acompanhamos todo o ciclo de decisão imobiliária empresarial, desde o diagnóstico inicial até à
+                instalação no espaço definitivo, com ferramentas digitais para web e Android.
             </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <!-- Member 1: Project Manager -->
-            <div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
+            <!-- Pillar 1: Startups -->
+            <div
+                class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
                 <div>
-                    <div class="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/40 text-brand-blue flex items-center justify-center font-bold mb-4">
-                        PM
+                    <div
+                        class="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/40 text-brand-blue flex items-center justify-center font-bold mb-4">
+                        <i class="fa-solid fa-rocket"></i>
                     </div>
-                    <span class="text-xs font-mono uppercase tracking-wider text-brand-blue font-semibold">Liderança</span>
-                    <h4 class="text-xl font-bold font-serif-title mt-1 mb-3 text-slate-900 dark:text-white">Project Manager</h4>
+                    <span
+                        class="text-xs font-mono uppercase tracking-wider text-brand-blue font-semibold">Empreendedorismo</span>
+                    <h4 class="text-xl font-bold font-serif-title mt-1 mb-3 text-slate-900 dark:text-white">Startups &
+                        Incubação</h4>
                     <ul class="text-xs text-slate-600 dark:text-slate-400 space-y-2 list-disc list-inside">
-                        <li>Comunicação com cliente e stakeholders</li>
-                        <li>Gestão de conflitos e planeamento (GANTT + WBS)</li>
-                        <li>Relatórios de desempenho I, II e III</li>
+                        <li>Seleção de incubadoras e coworkings flexíveis</li>
+                        <li>Apoio em candidaturas a espaços subsidiados</li>
+                        <li>Acesso a domiciliação fiscal e salas incluídas</li>
                     </ul>
                 </div>
-                <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 text-[11px] text-slate-500 font-mono">
-                    Responsabilidade: Milestone I, II, III
+                <div
+                    class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 text-[11px] text-slate-500 font-mono">
+                    Foco: Incubadoras & Cowork
                 </div>
             </div>
 
-            <!-- Member 2: Analyst / System Architect -->
-            <div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
+            <!-- Pillar 2: Established Companies -->
+            <div
+                class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
                 <div>
-                    <div class="w-10 h-10 rounded-lg bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold mb-4">
-                        SA
+                    <div
+                        class="w-10 h-10 rounded-lg bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold mb-4">
+                        <i class="fa-solid fa-industry"></i>
                     </div>
-                    <span class="text-xs font-mono uppercase tracking-wider text-emerald-600 dark:text-emerald-400 font-semibold">Arquitetura</span>
-                    <h4 class="text-xl font-bold font-serif-title mt-1 mb-3 text-slate-900 dark:text-white">Analyst / Architect</h4>
+                    <span
+                        class="text-xs font-mono uppercase tracking-wider text-emerald-600 dark:text-emerald-400 font-semibold">Expansão</span>
+                    <h4 class="text-xl font-bold font-serif-title mt-1 mb-3 text-slate-900 dark:text-white">Escritórios
+                        & Armazéns</h4>
                     <ul class="text-xs text-slate-600 dark:text-slate-400 space-y-2 list-disc list-inside">
-                        <li>Criação do repositório Git / SVN</li>
-                        <li>Relatório de Especificação de Requisitos</li>
-                        <li>Plano de Testes de Aceitação & Manual</li>
+                        <li>Gabinetes privados em centros de negócios</li>
+                        <li>Localização em parques empresariais e logísticos</li>
+                        <li>Avaliação de estacionamento e acessos rodoviários</li>
                     </ul>
                 </div>
-                <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 text-[11px] text-slate-500 font-mono">
-                    Responsabilidade: Requisitos & QA
+                <div
+                    class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 text-[11px] text-slate-500 font-mono">
+                    Foco: PMEs & Empresas Consolidadas
                 </div>
             </div>
 
-            <!-- Member 3: Programmer -->
-            <div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
+            <!-- Pillar 3: Data & AHP -->
+            <div
+                class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
                 <div>
-                    <div class="w-10 h-10 rounded-lg bg-amber-100 dark:bg-amber-900/40 text-amber-600 dark:text-amber-400 flex items-center justify-center font-bold mb-4">
-                        DEV
+                    <div
+                        class="w-10 h-10 rounded-lg bg-amber-100 dark:bg-amber-900/40 text-amber-600 dark:text-amber-400 flex items-center justify-center font-bold mb-4">
+                        <i class="fa-solid fa-scale-balanced"></i>
                     </div>
-                    <span class="text-xs font-mono uppercase tracking-wider text-amber-600 dark:text-amber-400 font-semibold">Desenvolvimento</span>
-                    <h4 class="text-xl font-bold font-serif-title mt-1 mb-3 text-slate-900 dark:text-white">Programmer</h4>
+                    <span
+                        class="text-xs font-mono uppercase tracking-wider text-amber-600 dark:text-amber-400 font-semibold">Inteligência</span>
+                    <h4 class="text-xl font-bold font-serif-title mt-1 mb-3 text-slate-900 dark:text-white">Motor AHP &
+                        Dados</h4>
                     <ul class="text-xs text-slate-600 dark:text-slate-400 space-y-2 list-disc list-inside">
-                        <li>Implementação C# / WPF / SQL Server</li>
-                        <li>Modelação do motor de algoritmo AHP em C#</li>
-                        <li>Testes unitários e revisão de código</li>
+                        <li>Execução sobre base de dados de 68 espaços</li>
+                        <li>Ponderação exata dos 9 critérios operacionais</li>
+                        <li>Relatórios executivos prontos a partilhar</li>
                     </ul>
                 </div>
-                <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 text-[11px] text-slate-500 font-mono">
-                    Responsabilidade: C# LINQ / SQL / WPF
+                <div
+                    class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 text-[11px] text-slate-500 font-mono">
+                    Foco: Decisão Baseada em Evidência
                 </div>
             </div>
 
-            <!-- Member 4: Secretary -->
-            <div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
+            <!-- Pillar 4: Android Companion App -->
+            <div
+                class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
                 <div>
-                    <div class="w-10 h-10 rounded-lg bg-purple-100 dark:bg-purple-900/40 text-purple-600 dark:text-purple-400 flex items-center justify-center font-bold mb-4">
-                        SEC
+                    <div
+                        class="w-10 h-10 rounded-lg bg-purple-100 dark:bg-purple-900/40 text-purple-600 dark:text-purple-400 flex items-center justify-center font-bold mb-4">
+                        <i class="fa-brands fa-android"></i>
                     </div>
-                    <span class="text-xs font-mono uppercase tracking-wider text-purple-600 dark:text-purple-400 font-semibold">Web & Artigo</span>
-                    <h4 class="text-xl font-bold font-serif-title mt-1 mb-3 text-slate-900 dark:text-white">Secretary</h4>
+                    <span
+                        class="text-xs font-mono uppercase tracking-wider text-purple-600 dark:text-purple-400 font-semibold">Mobilidade</span>
+                    <h4 class="text-xl font-bold font-serif-title mt-1 mb-3 text-slate-900 dark:text-white">App Android
+                        Nucleus</h4>
                     <ul class="text-xs text-slate-600 dark:text-slate-400 space-y-2 list-disc list-inside">
-                        <li>Manutenção do website da empresa / projeto</li>
-                        <li>Atas das reuniões & normas de documentação</li>
-                        <li>Produção do Scientific Paper internacional</li>
+                        <li>Acesso biométrico e histórico de simulações</li>
+                        <li>Comparador lado a lado e cálculo de distância GPS</li>
+                        <li>Navegação direta e contacto imediato com espaços</li>
                     </ul>
                 </div>
-                <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 text-[11px] text-slate-500 font-mono">
-                    Responsabilidade: Website & Paper
+                <div
+                    class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 text-[11px] text-slate-500 font-mono">
+                    Foco: Apoio Contínuo ao Cliente
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SEÇÃO MILESTONES & ENTREGÁVEIS -->
-    <section id="milestones" class="py-20 bg-slate-50 dark:bg-slate-900/50 border-t border-slate-200 dark:border-slate-800">
+    <!-- PROCESSO DE CONSULTORIA & REFERENCIAL DOS 9 CRITÉRIOS -->
+    <section id="processo"
+        class="py-20 bg-slate-50 dark:bg-slate-900/50 border-t border-slate-200 dark:border-slate-800">
         <div class="max-w-7xl mx-auto px-6">
             <div class="max-w-3xl mb-16">
-                <h2 class="text-xs font-bold uppercase tracking-widest text-brand-blue mb-2">Prazos & Avaliação</h2>
+                <h2 class="text-xs font-bold uppercase tracking-widest text-brand-blue mb-2">Metodologia & Transparência
+                </h2>
                 <h3 class="text-3xl sm:text-4xl font-serif-title font-bold text-slate-900 dark:text-white">
-                    Milestones e Ponderação de Notas
+                    Do Diagnóstico à Instalação & Guia dos Critérios
                 </h3>
                 <p class="mt-4 text-slate-600 dark:text-slate-400 text-sm sm:text-base">
-                    Acompanhamento rigoroso dos prazos do semestre lectivo 2026/2027 do ISPGAYA. Nota: O atraso num marco implica uma penalização direta de -1 valor por dia útil.
+                    O nosso processo combina a autonomia da Área de Cliente (web e Android) com o acompanhamento técnico
+                    da nossa equipa de consultoria.
                 </p>
             </div>
 
-            <!-- Timeline Grid -->
+            <!-- Timeline Grid (3 Fases da Consultoria) -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-                <!-- Milestone 1 -->
+                <!-- Fase 1 -->
                 <div class="relative pl-6 border-l-2 border-brand-blue space-y-3">
-                    <span class="inline-block px-3 py-1 rounded bg-blue-100 dark:bg-blue-900/50 text-brand-blue text-xs font-bold font-mono">
-                        1ª Milestone — 12/11/2026
+                    <span
+                        class="inline-block px-3 py-1 rounded bg-blue-100 dark:bg-blue-900/50 text-brand-blue text-xs font-bold font-mono">
+                        Fase 1 — Diagnóstico
                     </span>
-                    <h4 class="text-lg font-bold font-serif-title text-slate-900 dark:text-white">Abertura e Planeamento</h4>
+                    <h4 class="text-lg font-bold font-serif-title text-slate-900 dark:text-white">Área de Cliente &
+                        Perfil</h4>
                     <ul class="text-xs text-slate-600 dark:text-slate-400 space-y-1.5 list-disc list-inside">
-                        <li>Planeamento do Projeto (GANTT + WBS)</li>
-                        <li>Abertura oficial do Website do Projeto</li>
-                        <li>Performance Report I</li>
+                        <li>Acesso autenticado à Área de Cliente (Web ou Android)</li>
+                        <li>Definição da tipologia (incubadora, escritório ou armazém)</li>
+                        <li>Seleção de zona geográfica e modalidade de contratação</li>
                     </ul>
                 </div>
 
-                <!-- Milestone 2 -->
+                <!-- Fase 2 -->
                 <div class="relative pl-6 border-l-2 border-amber-500 space-y-3">
-                    <span class="inline-block px-3 py-1 rounded bg-amber-100 dark:bg-amber-900/50 text-amber-700 dark:text-amber-300 text-xs font-bold font-mono">
-                        2ª Milestone — 17/12/2026
+                    <span
+                        class="inline-block px-3 py-1 rounded bg-amber-100 dark:bg-amber-900/50 text-amber-700 dark:text-amber-300 text-xs font-bold font-mono">
+                        Fase 2 — Simulação AHP
                     </span>
-                    <h4 class="text-lg font-bold font-serif-title text-slate-900 dark:text-white">Requisitos e Code Review</h4>
+                    <h4 class="text-lg font-bold font-serif-title text-slate-900 dark:text-white">Ponderação dos
+                        Critérios</h4>
                     <ul class="text-xs text-slate-600 dark:text-slate-400 space-y-1.5 list-disc list-inside">
-                        <li>Requirements Specification Report</li>
-                        <li>Acceptance Tests Report & Code Review I</li>
-                        <li>Survival Test do projeto & Performance Report II</li>
+                        <li>Atribuição de peso a cada critério</li>
+                        <li>Execução do algoritmo AHP sobre os 68 espaços</li>
+                        <li>Gravação e comparação de cenários no histórico</li>
                     </ul>
                 </div>
 
-                <!-- Last Milestone -->
+                <!-- Fase 3 -->
                 <div class="relative pl-6 border-l-2 border-emerald-500 space-y-3">
-                    <span class="inline-block px-3 py-1 rounded bg-emerald-100 dark:bg-emerald-900/50 text-emerald-700 dark:text-emerald-300 text-xs font-bold font-mono">
-                        Last Milestone — 07/01/2027
+                    <span
+                        class="inline-block px-3 py-1 rounded bg-emerald-100 dark:bg-emerald-900/50 text-emerald-700 dark:text-emerald-300 text-xs font-bold font-mono">
+                        Fase 3 — Decisão & Visita
                     </span>
-                    <h4 class="text-lg font-bold font-serif-title text-slate-900 dark:text-white">Apresentação Final e Defesa</h4>
+                    <h4 class="text-lg font-bold font-serif-title text-slate-900 dark:text-white">Decisão &
+                        Instalação</h4>
                     <ul class="text-xs text-slate-600 dark:text-slate-400 space-y-1.5 list-disc list-inside">
-                        <li>Apresentação final & Defesa perante o Júri</li>
-                        <li>Artigo Científico (Scientific Paper)</li>
-                        <li>Manual de Instalação, Pen Drive & Final Report</li>
+                        <li>Análise de contratos e comodidades incluídas</li>
+                        <li>Agendamento de visitas com rotas GPS na App Android</li>
+                        <li>Acompanhamento até à instalação da equipa</li>
                     </ul>
                 </div>
             </div>
 
-            <!-- Evaluation Table Box -->
-            <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 sm:p-8 shadow-sm">
-                <h4 class="text-xl font-bold font-serif-title mb-6 text-slate-900 dark:text-white flex items-center justify-between">
-                    <span>Matriz de Ponderação da Avaliação Oficial (20 Valores)</span>
-                    <span class="text-xs font-mono font-normal text-slate-500">50% Docente + 50% Júri</span>
+            <!-- 9 Criteria Reference Table Box -->
+            <div
+                class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 sm:p-8 shadow-sm">
+                <h4
+                    class="text-xl font-bold font-serif-title mb-6 text-slate-900 dark:text-white flex flex-wrap items-center justify-between gap-2">
+                    <span>Referencial Oficial dos Critérios de Avaliação AHP</span>
+                    <span class="text-xs font-mono font-normal text-slate-500">Aplicado no Simulador Web e na App
+                        Android</span>
                 </h4>
 
                 <div class="overflow-x-auto">
                     <table class="w-full text-left text-xs sm:text-sm">
                         <thead>
-                            <tr class="border-b border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400 uppercase tracking-wider">
-                                <th class="pb-3 font-semibold">Tarefa / Componente</th>
-                                <th class="pb-3 font-semibold text-right">Cotação (Valores)</th>
+                            <tr
+                                class="border-b border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                                <th class="pb-3 font-semibold">Critério</th>
+                                <th class="pb-3 font-semibold">Escala / Regra de Leitura</th>
+                                <th class="pb-3 font-semibold text-right">Tipo AHP</th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-slate-100 dark:divide-slate-800 text-slate-700 dark:text-slate-300">
+                        <tbody
+                            class="divide-y divide-slate-100 dark:divide-slate-800 text-slate-700 dark:text-slate-300">
                             <tr>
-                                <td class="py-2.5 font-medium">Interfaces Gráficas + Implementação Técnica (WPF / C#)</td>
-                                <td class="py-2.5 text-right font-mono font-bold text-brand-blue">6.00</td>
+                                <td class="py-2.5 font-medium">1. Recepcionista</td>
+                                <td class="py-2.5 text-slate-600 dark:text-slate-400">Presença de atendimento presencial
+                                    (Tem / Não tem)</td>
+                                <td class="py-2.5 text-right font-mono font-bold text-brand-blue">Binário (0 / 1)</td>
                             </tr>
                             <tr>
-                                <td class="py-2.5 font-medium">Modelos de Business Intelligence & Algoritmos AHP</td>
-                                <td class="py-2.5 text-right font-mono font-bold text-brand-blue">4.00</td>
+                                <td class="py-2.5 font-medium">2. WiFi</td>
+                                <td class="py-2.5 text-slate-600 dark:text-slate-400">Disponibilidade de internet sem
+                                    fios no espaço (Tem / Não tem)</td>
+                                <td class="py-2.5 text-right font-mono font-bold text-brand-blue">Binário (0 / 1)</td>
                             </tr>
                             <tr>
-                                <td class="py-2.5 font-medium">Relatório Final do Projeto (Final Report)</td>
-                                <td class="py-2.5 text-right font-mono font-bold text-brand-blue">3.00</td>
+                                <td class="py-2.5 font-medium">3. Sala de Reuniões</td>
+                                <td class="py-2.5 text-slate-600 dark:text-slate-400">Valor/hora; ou
+                                    tempo/mês incluído na mensalidade</td>
+                                <td
+                                    class="py-2.5 text-right font-mono font-bold text-emerald-600 dark:text-emerald-400">
+                                    Custo / Incluído</td>
                             </tr>
                             <tr>
-                                <td class="py-2.5 font-medium">Scientific Paper para Conferência Internacional</td>
-                                <td class="py-2.5 text-right font-mono font-bold text-brand-blue">2.00</td>
+                                <td class="py-2.5 font-medium">4. Estacionamento (1 a 4)</td>
+                                <td class="py-2.5 text-slate-600 dark:text-slate-400">Incluído/Não incluído,
+                                    ou facilidade de estacionar na periferia
+                                </td>
+                                <td class="py-2.5 text-right font-mono font-bold text-brand-blue">Escala 1–4</td>
                             </tr>
                             <tr>
-                                <td class="py-2.5 font-medium">Website do Projeto (Presença & Interatividade)</td>
-                                <td class="py-2.5 text-right font-mono font-bold text-brand-blue">1.00</td>
+                                <td class="py-2.5 font-medium">5. Transportes (1 a 4)</td>
+                                <td class="py-2.5 text-slate-600 dark:text-slate-400">Classificação por zonas com bus,
+                                    metro e/ou comboio</td>
+                                <td class="py-2.5 text-right font-mono font-bold text-brand-blue">Escala 1–4</td>
                             </tr>
                             <tr>
-                                <td class="py-2.5 font-medium">Especificação de Requisitos & Testes de Aceitação</td>
-                                <td class="py-2.5 text-right font-mono font-bold text-brand-blue">2.00</td>
+                                <td class="py-2.5 font-medium">6. Cantina / Rest. (1 a 4)</td>
+                                <td class="py-2.5 text-slate-600 dark:text-slate-400">Espaços com cantina, restaurante
+                                    ou copa</td>
+                                <td class="py-2.5 text-right font-mono font-bold text-brand-blue">Escala 1–4</td>
                             </tr>
                             <tr>
-                                <td class="py-2.5 font-medium">Outros (Gantt, Performance Reports, Apresentação, Pen, Instalação)</td>
-                                <td class="py-2.5 text-right font-mono font-bold text-brand-blue">2.00</td>
+                                <td class="py-2.5 font-medium">7. Área de Lazer</td>
+                                <td class="py-2.5 text-slate-600 dark:text-slate-400">Zonas de descanso, networking,
+                                    lounge e
+                                    descompressão (Tem / Não tem)</td>
+                                <td class="py-2.5 text-right font-mono font-bold text-brand-blue">Binário (0 / 1)</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2.5 font-medium">8. AC (Climatização)</td>
+                                <td class="py-2.5 text-slate-600 dark:text-slate-400">Sistema de ar condicionado
+                                    instalado (Tem / Não tem)</td>
+                                <td class="py-2.5 text-right font-mono font-bold text-brand-blue">Binário (0 / 1)</td>
                             </tr>
                             <tr class="bg-slate-50 dark:bg-slate-800/80 font-bold">
-                                <td class="py-3 px-2 text-slate-900 dark:text-white">TOTAL MÁXIMO</td>
-                                <td class="py-3 px-2 text-right font-mono text-emerald-600 dark:text-emerald-400">20.00 Valores</td>
+                                <td class="py-3 px-2 text-slate-900 dark:text-white">9. Preço Mensalidade</td>
+                                <td class="py-3 px-2 font-normal text-slate-600 dark:text-slate-300">Valor mensal da
+                                    modalidade ou espaço subsidiado / acessível apenas por candidatura</td>
+                                <td class="py-3 px-2 text-right font-mono text-emerald-600 dark:text-emerald-400">Custo
+                                    / Candidatura</td>
                             </tr>
                         </tbody>
                     </table>
@@ -738,63 +973,208 @@
     <footer class="bg-slate-950 text-slate-400 py-12 border-t border-slate-800">
         <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
-                <a href="#" class="text-2xl font-bold font-serif-title tracking-tight text-white flex items-center gap-1">
+                <a href="#"
+                    class="text-2xl font-bold font-serif-title tracking-tight text-white flex items-center gap-1">
                     <span>Nucleus</span>
                     <span class="text-brand-blue">.</span>
                 </a>
                 <p class="text-xs text-slate-500 mt-1">
-                    ISPGAYA — Instituto Superior Politécnico | Licenciatura em Engenharia Informática 2026/2027
+                    Consultoria de Espaços Empresariais & Apoio à Decisão Multicritério (Web + App Android)
                 </p>
             </div>
 
-            <div class="flex items-center space-x-6 text-xs font-medium">
+            <div class="flex flex-wrap items-center space-x-6 text-xs font-medium">
                 <a href="#sobre" class="hover:text-white transition-colors">Sobre</a>
-                <a href="#parques" class="hover:text-white transition-colors">Parques</a>
-                <a href="#simulador" class="hover:text-white transition-colors">Simulador AHP</a>
-                <a href="#milestones" class="hover:text-white transition-colors">Milestones</a>
+                <a href="#espacos" class="hover:text-white transition-colors">Espaços</a>
+                <a href="#simulador" onclick="goToSimulator(event)" class="hover:text-white transition-colors">Simulador
+                    AHP</a>
+                <a href="#processo" class="hover:text-white transition-colors">Critérios & App</a>
+                <button onclick="openClientModal()" class="hover:text-white transition-colors">Área de Cliente</button>
             </div>
 
             <div class="text-xs text-slate-500">
-                &copy; 2026 Nucleus Team. Todos os direitos reservados.
+                &copy; 2026 Nucleus Consultoria Empresarial. Todos os direitos reservados.
             </div>
         </div>
     </footer>
 
-    <!-- Export Report Toast Modal (Interactive Feedback) -->
-    <div id="exportModal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
-        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-lg w-full p-6 shadow-2xl relative">
-            <button onclick="closeExportModal()" class="absolute right-4 top-4 text-slate-400 hover:text-slate-600 dark:hover:text-white">
+    <!-- CLIENT AREA MODAL (Login / Registo / Histórico) -->
+    <div id="clientModal"
+        class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+        <div
+            class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-lg w-full p-6 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+            <button onclick="closeClientModal()"
+                class="absolute right-4 top-4 text-slate-400 hover:text-slate-600 dark:hover:text-white">
                 <i class="fa-solid fa-xmark text-lg"></i>
             </button>
 
-            <div class="w-12 h-12 bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 rounded-full flex items-center justify-center text-xl mb-4">
-                <i class="fa-solid fa-file-pdf"></i>
+            <div class="flex items-center gap-3 mb-4">
+                <div
+                    class="w-10 h-10 bg-blue-100 dark:bg-blue-900/40 text-brand-blue rounded-full flex items-center justify-center text-lg">
+                    <i class="fa-regular fa-user"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold font-serif-title text-slate-900 dark:text-white">Área de Cliente
+                        Nucleus</h3>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">Acesso sincronizado com a lógica do Simulador
+                        AHP e App Android</p>
+                </div>
+            </div>
+
+            <!-- Unauthenticated View -->
+            <div id="clientAuthView" class="space-y-4">
+                <div id="clientAuthNotice"
+                    class="hidden p-3 rounded-lg bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800 text-xs text-amber-800 dark:text-amber-200 flex items-center gap-2">
+                    <i class="fa-solid fa-lock text-amber-500"></i>
+                    <span>Inicie sessão ou crie uma conta para desbloquear o Simulador AHP na Área de Cliente.</span>
+                </div>
+                <div class="flex border-b border-slate-200 dark:border-slate-800 text-xs font-semibold">
+                    <button id="tabLoginBtn" onclick="switchClientTab('login')"
+                        class="px-4 py-2 border-b-2 border-brand-blue text-brand-blue">Entrar</button>
+                    <button id="tabRegisterBtn" onclick="switchClientTab('register')"
+                        class="px-4 py-2 border-b-2 border-transparent text-slate-500 hover:text-slate-700 dark:hover:text-slate-300">Criar
+                        Conta</button>
+                </div>
+
+                <form id="clientLoginForm" onsubmit="handleClientLogin(event)" class="space-y-3">
+                    <div>
+                        <label class="block text-xs font-medium text-slate-600 dark:text-slate-300 mb-1">Email
+                            empresarial</label>
+                        <input type="email" id="loginEmail" required placeholder="nome@empresa.pt"
+                            class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-blue">
+                    </div>
+                    <div>
+                        <label
+                            class="block text-xs font-medium text-slate-600 dark:text-slate-300 mb-1">Palavra-passe</label>
+                        <input type="password" id="loginPassword" required placeholder="••••••••"
+                            class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-blue">
+                    </div>
+                    <div class="flex items-center justify-between pt-1">
+                        <button type="button" onclick="fillDemoClient()"
+                            class="text-xs text-brand-blue hover:underline">Usar conta demonstração</button>
+                        <button type="submit"
+                            class="px-5 py-2 bg-brand-blue hover:bg-blue-700 text-white rounded-lg text-xs font-semibold">Entrar
+                            no Simulador</button>
+                    </div>
+                </form>
+
+                <form id="clientRegisterForm" onsubmit="handleClientRegister(event)" class="space-y-3 hidden">
+                    <div>
+                        <label class="block text-xs font-medium text-slate-600 dark:text-slate-300 mb-1">Nome /
+                            Empresa</label>
+                        <input type="text" id="regName" required placeholder="Ex: TechPorto Lda"
+                            class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-blue">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-600 dark:text-slate-300 mb-1">Perfil de
+                            Procura</label>
+                        <select id="regProfile"
+                            class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-blue">
+                            <option value="Startup (Incubadora / Cowork)">Startup (Incubadora / Cowork)</option>
+                            <option value="PME (Escritório Privado)">PME (Escritório Privado)</option>
+                            <option value="Empresa Consolidada (Parque / Armazém)">Empresa Consolidada (Parque /
+                                Armazém)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-600 dark:text-slate-300 mb-1">Email</label>
+                        <input type="email" id="regEmail" required placeholder="contacto@empresa.pt"
+                            class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-blue">
+                    </div>
+                    <div>
+                        <label
+                            class="block text-xs font-medium text-slate-600 dark:text-slate-300 mb-1">Palavra-passe</label>
+                        <input type="password" id="regPassword" required minlength="4" placeholder="Mínimo 4 caracteres"
+                            class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-blue">
+                    </div>
+                    <div class="flex justify-end pt-1">
+                        <button type="submit"
+                            class="px-5 py-2 bg-brand-blue hover:bg-blue-700 text-white rounded-lg text-xs font-semibold">Criar
+                            Conta & Aceder</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Authenticated View -->
+            <div id="clientDashboardView" class="hidden space-y-4">
+                <div
+                    class="p-3.5 rounded-xl bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800 flex items-center justify-between">
+                    <div>
+                        <div id="clientProfileName" class="text-sm font-bold text-slate-900 dark:text-white"></div>
+                        <div id="clientProfileMeta" class="text-xs text-slate-600 dark:text-slate-400"></div>
+                    </div>
+                    <button onclick="handleClientLogout()"
+                        class="text-xs text-red-600 dark:text-red-400 hover:underline font-medium">Terminar
+                        sessão</button>
+                </div>
+
+                <div>
+                    <div class="flex items-center justify-between mb-2">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500">Simulações Guardadas</h4>
+                        <button onclick="clearSimulationHistory()"
+                            class="text-[11px] text-slate-400 hover:text-red-500">Limpar histórico</button>
+                    </div>
+                    <div id="clientHistoryList" class="space-y-2 max-h-56 overflow-y-auto">
+                        <!-- Rendered by script.js -->
+                    </div>
+                </div>
+
+                <div class="flex justify-end gap-2 pt-2 border-t border-slate-200 dark:border-slate-800">
+                    <button
+                        onclick="closeClientModal(); document.getElementById('simulador').scrollIntoView({behavior:'smooth'});"
+                        class="px-4 py-2 bg-brand-blue text-white rounded-lg text-xs font-semibold hover:bg-blue-600">
+                        Ir para o Simulador AHP
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Export Report Toast Modal (Interactive Feedback) -->
+    <div id="exportModal"
+        class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+        <div
+            class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-lg w-full p-6 shadow-2xl relative">
+            <button onclick="closeExportModal()"
+                class="absolute right-4 top-4 text-slate-400 hover:text-slate-600 dark:hover:text-white">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div
+                class="w-12 h-12 bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 rounded-full flex items-center justify-center text-xl mb-4">
+                <i class="fa-solid fa-file-lines"></i>
             </div>
 
             <h3 class="text-xl font-bold font-serif-title text-slate-900 dark:text-white mb-2">
-                Relatório de Decisão Gerado (AHP Export)
+                Relatório de Recomendação Nucleus (AHP)
             </h3>
             <p class="text-xs text-slate-600 dark:text-slate-400 mb-4">
-                Os resultados da simulação foram processados com sucesso segundo a especificação do requisito <strong>RF7</strong>.
+                Resumo executivo gerado a partir dos 9 critérios ponderados na sua Área de Cliente. Pode copiar os dados
+                ou consultar o espaço na app Android.
             </p>
 
-            <div id="modalReportContent" class="p-4 bg-slate-50 dark:bg-slate-800 rounded-lg text-xs font-mono space-y-2 mb-6 border border-slate-200 dark:border-slate-700">
+            <div id="modalReportContent"
+                class="p-4 bg-slate-50 dark:bg-slate-800 rounded-lg text-xs font-mono space-y-1.5 mb-6 border border-slate-200 dark:border-slate-700 max-h-60 overflow-y-auto">
                 <!-- Content set by JS -->
             </div>
 
             <div class="flex justify-end gap-3">
-                <button onclick="closeExportModal()" class="px-4 py-2 bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg text-xs font-medium">
+                <button onclick="closeExportModal()"
+                    class="px-4 py-2 bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg text-xs font-medium">
                     Fechar
                 </button>
-                <button onclick="copyReportToClipboard()" class="px-4 py-2 bg-brand-blue text-white rounded-lg text-xs font-semibold hover:bg-blue-600 flex items-center gap-1.5">
+                <button onclick="copyReportToClipboard()"
+                    class="px-4 py-2 bg-brand-blue text-white rounded-lg text-xs font-semibold hover:bg-blue-600 flex items-center gap-1.5">
                     <i class="fa-regular fa-copy"></i>
-                    <span>Copiar Dados JSON/AHP</span>
+                    <span>Copiar Relatório JSON</span>
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- JAVASCRIPT CALL -->
+    <!-- JAVASCRIPT DATA & APPLICATION LOGIC -->
+    <script src="empresas-data.js"></script>
     <script src="script.js"></script>
 </body>
+
 </html>
