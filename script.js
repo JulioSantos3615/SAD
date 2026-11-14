@@ -40,6 +40,8 @@ const CANTINA_LABELS = {
 };
 
 let showAllSpaces = false;
+let dynamicSpacesData = typeof EMPRESAS_DATA !== 'undefined' ? EMPRESAS_DATA : [];
+let spacesDataSource = 'local';
 let lastSimulationResult = null;
 let pendingSpaceSelection = null;
 let pendingRedirectToSim = false;
@@ -133,7 +135,7 @@ function getFilteredSpaces() {
     const regionVal = document.getElementById('regionFilter')?.value || 'all';
     const typeVal = document.getElementById('typeFilter')?.value || 'all';
 
-    return (typeof EMPRESAS_DATA !== 'undefined' ? EMPRESAS_DATA : []).filter(item => {
+    return dynamicSpacesData.filter(item => {
         const name = (item['EMPRESA'] || '').toLowerCase();
         const dir = (item['DIRECCAO'] || '').toLowerCase();
         const loc = item['Localização'] || '';
@@ -154,12 +156,13 @@ function renderSpacesDirectory() {
     if (!grid) return;
 
     const filtered = getFilteredSpaces();
-    const totalAll = (typeof EMPRESAS_DATA !== 'undefined' ? EMPRESAS_DATA.length : 0);
+    const totalAll = dynamicSpacesData.length;
     const limit = showAllSpaces ? filtered.length : 6;
     const toRender = filtered.slice(0, limit);
 
     if (countLabel) {
-        countLabel.textContent = `A apresentar ${toRender.length} de ${filtered.length} espaços filtrados (total na base de dados: ${totalAll}).`;
+        const sourceTag = spacesDataSource === 'firebase' ? ' • Sincronizado em tempo real (Firebase)' : '';
+        countLabel.textContent = `A apresentar ${toRender.length} de ${filtered.length} espaços filtrados (total na base de dados: ${totalAll})${sourceTag}.`;
     }
 
     if (toggleBtn) {
@@ -183,7 +186,7 @@ function renderSpacesDirectory() {
     }
 
     grid.innerHTML = toRender.map(item => {
-        const empresa = item['EMPRESA'];
+        const empresa = item['EMPRESA'] || 'Espaço sem nome';
         const localizacao = item['Localização'] || 'Grande Porto';
         const tipologia = item['TIPOLOGIA'] || 'Espaço Empresarial';
         const direccao = item['DIRECCAO'] || '';
@@ -443,8 +446,8 @@ function runAHPSimulation(highlightEmpresa = null) {
             <div class="flex justify-between items-center text-xs gap-2">
                 <span class="font-semibold text-slate-200 flex items-center gap-2 truncate">
                     ${isWinner
-                        ? '<span class="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-mono text-[10px] font-bold shrink-0">#1 RECOMENDADO</span>'
-                        : `<span class="text-slate-400 font-mono shrink-0">#${index + 1}</span>`}
+                ? '<span class="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-mono text-[10px] font-bold shrink-0">#1 RECOMENDADO</span>'
+                : `<span class="text-slate-400 font-mono shrink-0">#${index + 1}</span>`}
                     <span class="truncate">${entry.item['EMPRESA']}</span>
                     <span class="text-[11px] font-normal text-slate-400 hidden sm:inline">(${entry.item['Localização']})</span>
                 </span>
@@ -800,8 +803,72 @@ function fallbackCopy(text) {
     document.body.removeChild(textarea);
 }
 
+// --- Sincronização em tempo real com Cloud Firestore ---
+function normalizeFirestoreSpace(id, raw) {
+    return {
+        id,
+        'EMPRESA': raw['EMPRESA'] ?? raw.empresa ?? 'Espaço sem nome',
+        'DIRECCAO': raw['DIRECCAO'] ?? raw.direccao ?? '',
+        'Localização': raw['Localização'] ?? raw.localizacao ?? 'Grande Porto',
+        'TIPOLOGIA': raw['TIPOLOGIA'] ?? raw.tipologia ?? 'Espaço Empresarial',
+        'Cowork': raw['Cowork'] ?? raw.precoCowork ?? null,
+        'Mesa individual': raw['Mesa individual'] ?? raw.precoMesaIndividual ?? null,
+        'Privado': raw['Privado'] ?? raw.precoPrivado ?? null,
+        'Escritório Virtual': raw['Escritório Virtual'] ?? raw.precoEscritorioVirtual ?? null,
+        'SALA DE REUNIOES': raw['SALA DE REUNIOES'] ?? raw.precoSalaReunioes ?? null,
+        'Modelo de Preço': raw['Modelo de Preço'] ?? raw.modeloPreco ?? 'Mensalidade',
+        'RECEPCIONISTA': raw['RECEPCIONISTA'] ?? (raw.temRecepcionista ? '1' : '0'),
+        'WiFi': raw['WiFi'] ?? (raw.temWiFi ? '1' : '0'),
+        'AC': raw['AC'] ?? (raw.temAc ? '1' : '0'),
+        'AREA DE LAZER': raw['AREA DE LAZER'] ?? (raw.temAreaLazer ? '1' : '0'),
+        'ESTACIONAMENTO': raw['ESTACIONAMENTO'] ?? raw.nivelEstacionamento ?? 1,
+        'TRANSPORTES': raw['TRANSPORTES'] ?? raw.nivelTransportes ?? 1,
+        'CANTINA/REST': raw['CANTINA/REST'] ?? raw.nivelCantina ?? 1
+    };
+}
+
+function initFirestoreSpaces() {
+    if (typeof firebase === 'undefined' || !firebase.firestore) {
+        return;
+    }
+
+    try {
+        const firebaseConfig = {
+            apiKey: 'AIzaSyCvbzIkvpXBjSgXgf8MLPi48ePD2dyn_S8',
+            authDomain: 'projeto-cm-f517c.firebaseapp.com',
+            projectId: 'projeto-cm-f517c',
+            storageBucket: 'projeto-cm-f517c.firebasestorage.app',
+            messagingSenderId: '712094680171',
+            appId: '1:712094680171:web:c2f669888130b5fc891d2e'
+        };
+
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+
+        const db = firebase.firestore();
+        db.collection('espacos').onSnapshot(
+            snapshot => {
+                if (!snapshot.empty) {
+                    const docs = snapshot.docs.map(doc => normalizeFirestoreSpace(doc.id, doc.data()));
+                    docs.sort((a, b) => String(a['EMPRESA'] || '').localeCompare(String(b['EMPRESA'] || ''), 'pt'));
+                    dynamicSpacesData = docs;
+                    spacesDataSource = 'firebase';
+                    renderSpacesDirectory();
+                }
+            },
+            err => {
+                console.warn('Aviso Firestore (a usar dados locais de fallback):', err);
+            }
+        );
+    } catch (err) {
+        console.warn('Falha ao inicializar Firebase no diretório:', err);
+    }
+}
+
 // --- Inicialização ---
 window.onload = function () {
     renderSpacesDirectory();
     updateClientUI();
+    initFirestoreSpaces();
 };
