@@ -248,7 +248,7 @@ function toggleShowAllSpaces() {
 
 function goToSimulator(event) {
     if (event) event.preventDefault();
-    if (!getCurrentClient()) {
+    if (!document.getElementById('flutterAppFrame') && !getCurrentClient()) {
         pendingRedirectToSim = true;
         openClientModal('login', true);
         return;
@@ -278,7 +278,7 @@ function selectSpaceInSim(empresa, tipologia, localizacao) {
 
 // --- Algoritmo AHP Real (Matriz de Saaty 9x9 + Média Geométrica) ---
 function runAHPSimulation(highlightEmpresa = null) {
-    if (!getCurrentClient()) {
+    if (!document.getElementById('simModalidade') || !getCurrentClient()) {
         lastSimulationResult = null;
         return;
     }

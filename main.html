@@ -82,13 +82,6 @@
                     <span id="themeText" class="hidden sm:inline">Escuro</span>
                 </button>
 
-                <!-- Client Area Button -->
-                <button id="clientAreaBtn" onclick="openClientModal()"
-                    class="hidden sm:inline-flex items-center justify-center px-4 py-2.5 rounded-lg border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-900 font-medium text-sm transition-all gap-2">
-                    <i class="fa-regular fa-user text-brand-blue"></i>
-                    <span id="clientAreaLabel">Área de Cliente</span>
-                </button>
-
                 <!-- Primary CTA -->
                 <a href="#simulador" onclick="goToSimulator(event)"
                     class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-brand-blue text-white font-medium text-sm hover:bg-blue-700 transition-all shadow-sm shadow-blue-500/20 active:scale-95">
@@ -116,9 +109,6 @@
                 class="block text-slate-700 dark:text-slate-200 font-medium hover:text-brand-blue">Consultoria</a>
             <a href="#processo" onclick="toggleMobileMenu()"
                 class="block text-slate-700 dark:text-slate-200 font-medium hover:text-brand-blue">Critérios & App</a>
-            <button onclick="toggleMobileMenu(); openClientModal();"
-                class="w-full text-center py-2 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 rounded-lg font-medium">Área
-                de Cliente</button>
             <a href="#simulador" onclick="toggleMobileMenu(); goToSimulator(event);"
                 class="block text-center py-2 bg-brand-blue text-white rounded-lg font-medium">Simular agora</a>
         </div>
@@ -149,11 +139,11 @@
         <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-end pt-4">
             <!-- Left: Buttons -->
             <div class="md:col-span-6 flex flex-wrap items-center gap-4">
-                <button onclick="openClientModal()"
+                <a href="#simulador" onclick="goToSimulator(event)"
                     class="px-8 py-4 bg-brand-blue hover:bg-blue-700 text-white font-semibold text-base rounded-lg transition-all shadow-lg shadow-blue-500/25 flex items-center gap-3">
-                    <span>Entrar na Área de Cliente</span>
+                    <span>Aceder ao Simulador AHP</span>
                     <i class="fa-solid fa-arrow-right text-xs"></i>
-                </button>
+                </a>
                 <a href="#espacos"
                     class="px-8 py-4 bg-transparent hover:bg-slate-100 dark:hover:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 font-semibold text-base rounded-lg transition-all">
                     Explorar espaços mapeados
@@ -410,300 +400,56 @@
                     </p>
                 </div>
 
-                <!-- Client Session Status Pill -->
-                <div id="simClientBanner"
-                    class="bg-slate-800/90 border border-slate-700 rounded-xl px-4 py-3 flex items-center gap-3 shrink-0">
-                    <!-- Updated dynamically by script.js -->
+                <!-- Flutter Web App Actions -->
+                <div class="flex flex-wrap items-center gap-3 shrink-0">
+                    <div class="bg-slate-800/90 border border-slate-700 rounded-xl px-4 py-2.5 flex items-center gap-2.5 text-xs">
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span class="text-slate-200 font-medium">Motor Dart/Flutter + Firebase</span>
+                    </div>
+                    <a href="/app/" target="_blank" rel="noopener"
+                        class="px-4 py-2.5 bg-brand-blue hover:bg-blue-600 text-white font-semibold rounded-xl text-xs transition-all shadow-lg shadow-blue-500/20 flex items-center gap-2">
+                        <i class="fa-solid fa-up-right-from-square"></i>
+                        <span>Abrir em Ecrã Completo</span>
+                    </a>
                 </div>
             </div>
 
-            <div id="simulatorLockedGate"
-                class="bg-slate-800/70 backdrop-blur-sm border border-slate-700 rounded-2xl p-8 sm:p-12 text-center max-w-3xl mx-auto space-y-5 shadow-xl">
-                <div
-                    class="w-16 h-16 mx-auto rounded-2xl bg-blue-500/15 border border-blue-500/30 text-brand-blue flex items-center justify-center text-2xl">
-                    <i class="fa-solid fa-lock"></i>
-                </div>
-                <div class="space-y-2">
-                    <span
-                        class="inline-block text-[11px] font-mono uppercase tracking-widest text-blue-400 font-semibold">
-                        Acesso Exclusivo a Clientes Registados
-                    </span>
-                    <h3 class="text-2xl sm:text-3xl font-serif-title font-bold text-white">
-                        Entre na sua Área de Cliente para aceder ao Simulador AHP
-                    </h3>
-                    <p class="text-sm text-slate-400 max-w-xl mx-auto leading-relaxed">
-                        Tal como na aplicação Android Nucleus, o simulador multicritério de 9 parâmetros, o ranking
-                        personalizado e o histórico de simulações estão disponíveis apenas dentro da sua Área de
-                        Cliente.
-                    </p>
-                </div>
-                <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
-                    <button onclick="openClientModal('login', true)"
-                        class="px-6 py-3 bg-brand-blue hover:bg-blue-600 text-white font-semibold rounded-lg text-sm transition-all shadow-lg shadow-blue-500/20 flex items-center gap-2">
-                        <i class="fa-solid fa-right-to-bracket"></i>
-                        <span>Entrar na Área de Cliente</span>
-                    </button>
-                    <button onclick="openClientModal('register', true)"
-                        class="px-6 py-3 bg-slate-700 hover:bg-slate-600 text-white font-semibold rounded-lg text-sm transition-all flex items-center gap-2">
-                        <i class="fa-solid fa-user-plus"></i>
-                        <span>Criar Conta</span>
-                    </button>
+            <!-- Warning if opened via file:// -->
+            <div id="fileProtocolWarning"
+                class="hidden mb-6 p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-200 text-xs sm:text-sm flex items-start gap-3">
+                <i class="fa-solid fa-triangle-exclamation text-amber-400 mt-0.5"></i>
+                <div>
+                    <strong>Servidor HTTP necessário:</strong> O simulador Flutter Web não pode ser executado diretamente
+                    via <code>file://</code>. Inicie um servidor local (ex.: <code>python -m http.server 8080</code> na
+                    pasta do site) e aceda através de <code>http://localhost:8080/main.html</code>.
                 </div>
             </div>
 
-            <div id="simulatorUnlockedContent" class="hidden">
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-                    <!-- Controls Side (Left) -->
-                    <div
-                        class="lg:col-span-6 bg-slate-800/80 backdrop-blur-sm p-6 sm:p-8 rounded-2xl border border-slate-700 shadow-xl space-y-5">
-                        <h3
-                            class="text-lg font-bold font-serif-title border-b border-slate-700 pb-3 flex justify-between items-center">
-                            <span>Configuração & Ponderação (1 a 9)</span>
-                            <span class="text-xs font-mono font-normal text-blue-400">Normalização AHP: 100%</span>
-                        </h3>
-
-                        <!-- Filters inside Simulator -->
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pb-2 border-b border-slate-700/70">
-                            <div>
-                                <label for="simModalidade"
-                                    class="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">Modalidade</label>
-                                <select id="simModalidade" onchange="runAHPSimulation()"
-                                    class="w-full py-2 px-2.5 bg-slate-900 border border-slate-700 rounded-lg text-xs text-white focus:outline-none focus:ring-2 focus:ring-brand-blue">
-                                    <option value="Cowork">Cowork</option>
-                                    <option value="Mesa individual">Mesa Individual</option>
-                                    <option value="Privado">Escritório Privado</option>
-                                    <option value="Escritório Virtual">Escritório Virtual</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label for="simLocalizacao"
-                                    class="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">Localização</label>
-                                <select id="simLocalizacao" onchange="runAHPSimulation()"
-                                    class="w-full py-2 px-2.5 bg-slate-900 border border-slate-700 rounded-lg text-xs text-white focus:outline-none focus:ring-2 focus:ring-brand-blue">
-                                    <option value="Todas">Todas</option>
-                                    <option value="Porto">Porto</option>
-                                    <option value="Vila Nova de Gaia">Vila Nova de Gaia</option>
-                                    <option value="Matosinhos">Matosinhos</option>
-                                    <option value="Maia">Maia</option>
-                                    <option value="Gondomar">Gondomar</option>
-                                    <option value="S. Félix da Marinha">S. Félix da Marinha</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label for="simTipologia"
-                                    class="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">Tipologia</label>
-                                <select id="simTipologia" onchange="runAHPSimulation()"
-                                    class="w-full py-2 px-2.5 bg-slate-900 border border-slate-700 rounded-lg text-xs text-white focus:outline-none focus:ring-2 focus:ring-brand-blue">
-                                    <option value="Todas">Todas</option>
-                                    <option value="Incubadoras de Empresas">Incubadoras</option>
-                                    <option value="Parques Empresariais e Tecnológicos">Parques Empresariais</option>
-                                    <option value="Centros de Negócios (Business Centers / Corporate)">Centros de
-                                        Negócios
-                                    </option>
-                                    <option value="Coworking Flexível / Hubs Comunitários">Coworking Flexível</option>
-                                    <option value="Boutique Coworking space">Boutique Coworking</option>
-                                    <option value="Serviços empresariais multimédia">Multimédia</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <!-- 9 Criteria Sliders -->
-                        <div class="space-y-4 max-h-[470px] overflow-y-auto pr-1">
-                            <!-- 1. RECEPCIONISTA -->
-                            <div>
-                                <div class="flex justify-between items-center text-xs sm:text-sm font-medium mb-1">
-                                    <label for="w_rec" class="text-slate-200 flex items-center gap-2">
-                                        <i class="fa-solid fa-headset text-sky-400 w-4 text-center"></i> 1.
-                                        Recepcionista
-                                        <span class="text-[11px] text-slate-400 font-normal">(Tem/Não tem)</span>
-                                    </label>
-                                    <span id="val_rec" class="font-mono text-brand-blue font-bold text-xs">5
-                                        (11%)</span>
-                                </div>
-                                <input type="range" id="w_rec" min="1" max="9" value="5" oninput="runAHPSimulation()"
-                                    class="w-full accent-brand-blue cursor-pointer bg-slate-700 rounded-lg h-1.5">
-                            </div>
-
-                            <!-- 2. WiFi -->
-                            <div>
-                                <div class="flex justify-between items-center text-xs sm:text-sm font-medium mb-1">
-                                    <label for="w_wifi" class="text-slate-200 flex items-center gap-2">
-                                        <i class="fa-solid fa-wifi text-emerald-400 w-4 text-center"></i> 2. WiFi <span
-                                            class="text-[11px] text-slate-400 font-normal">(Tem/Não tem)</span>
-                                    </label>
-                                    <span id="val_wifi" class="font-mono text-brand-blue font-bold text-xs">7
-                                        (16%)</span>
-                                </div>
-                                <input type="range" id="w_wifi" min="1" max="9" value="7" oninput="runAHPSimulation()"
-                                    class="w-full accent-brand-blue cursor-pointer bg-slate-700 rounded-lg h-1.5">
-                            </div>
-
-                            <!-- 3. SALA DE REUNIOES -->
-                            <div>
-                                <div class="flex justify-between items-center text-xs sm:text-sm font-medium mb-1">
-                                    <label for="w_reunioes" class="text-slate-200 flex items-center gap-2">
-                                        <i class="fa-solid fa-users-rectangle text-indigo-400 w-4 text-center"></i> 3.
-                                        Sala
-                                        de Reuniões <span class="text-[11px] text-slate-400 font-normal">(€/h)</span>
-                                    </label>
-                                    <span id="val_reunioes" class="font-mono text-brand-blue font-bold text-xs">6
-                                        (13%)</span>
-                                </div>
-                                <input type="range" id="w_reunioes" min="1" max="9" value="6"
-                                    oninput="runAHPSimulation()"
-                                    class="w-full accent-brand-blue cursor-pointer bg-slate-700 rounded-lg h-1.5">
-                            </div>
-
-                            <!-- 4. ESTACIONAMENTO -->
-                            <div>
-                                <div class="flex justify-between items-center text-xs sm:text-sm font-medium mb-1">
-                                    <label for="w_est" class="text-slate-200 flex items-center gap-2">
-                                        <i class="fa-solid fa-square-parking text-amber-400 w-4 text-center"></i> 4.
-                                        Estacionamento <span class="text-[11px] text-slate-400 font-normal">(Escala 1 a
-                                            4)</span>
-                                    </label>
-                                    <span id="val_est" class="font-mono text-brand-blue font-bold text-xs">5
-                                        (11%)</span>
-                                </div>
-                                <input type="range" id="w_est" min="1" max="9" value="5" oninput="runAHPSimulation()"
-                                    class="w-full accent-brand-blue cursor-pointer bg-slate-700 rounded-lg h-1.5">
-                            </div>
-
-                            <!-- 5. TRANSPORTES -->
-                            <div>
-                                <div class="flex justify-between items-center text-xs sm:text-sm font-medium mb-1">
-                                    <label for="w_trans" class="text-slate-200 flex items-center gap-2">
-                                        <i class="fa-solid fa-train-subway text-purple-400 w-4 text-center"></i> 5.
-                                        Transportes <span class="text-[11px] text-slate-400 font-normal">(Escala 1 a
-                                            4)</span>
-                                    </label>
-                                    <span id="val_trans" class="font-mono text-brand-blue font-bold text-xs">6
-                                        (13%)</span>
-                                </div>
-                                <input type="range" id="w_trans" min="1" max="9" value="6" oninput="runAHPSimulation()"
-                                    class="w-full accent-brand-blue cursor-pointer bg-slate-700 rounded-lg h-1.5">
-                            </div>
-
-                            <!-- 6. CANTINA/REST -->
-                            <div>
-                                <div class="flex justify-between items-center text-xs sm:text-sm font-medium mb-1">
-                                    <label for="w_cantina" class="text-slate-200 flex items-center gap-2">
-                                        <i class="fa-solid fa-utensils text-orange-400 w-4 text-center"></i> 6. Cantina
-                                        /
-                                        Rest. <span class="text-[11px] text-slate-400 font-normal">(Escala 1 a 4)</span>
-                                    </label>
-                                    <span id="val_cantina" class="font-mono text-brand-blue font-bold text-xs">4
-                                        (9%)</span>
-                                </div>
-                                <input type="range" id="w_cantina" min="1" max="9" value="4"
-                                    oninput="runAHPSimulation()"
-                                    class="w-full accent-brand-blue cursor-pointer bg-slate-700 rounded-lg h-1.5">
-                            </div>
-
-                            <!-- 7. AREA DE LAZER -->
-                            <div>
-                                <div class="flex justify-between items-center text-xs sm:text-sm font-medium mb-1">
-                                    <label for="w_lazer" class="text-slate-200 flex items-center gap-2">
-                                        <i class="fa-solid fa-couch text-pink-400 w-4 text-center"></i> 7. Área de Lazer
-                                        <span class="text-[11px] text-slate-400 font-normal">(Tem/Não tem)</span>
-                                    </label>
-                                    <span id="val_lazer" class="font-mono text-brand-blue font-bold text-xs">3
-                                        (7%)</span>
-                                </div>
-                                <input type="range" id="w_lazer" min="1" max="9" value="3" oninput="runAHPSimulation()"
-                                    class="w-full accent-brand-blue cursor-pointer bg-slate-700 rounded-lg h-1.5">
-                            </div>
-
-                            <!-- 8. AC -->
-                            <div>
-                                <div class="flex justify-between items-center text-xs sm:text-sm font-medium mb-1">
-                                    <label for="w_ac" class="text-slate-200 flex items-center gap-2">
-                                        <i class="fa-solid fa-snowflake text-cyan-400 w-4 text-center"></i> 8. Ar
-                                        Condicionado (AC) <span class="text-[11px] text-slate-400 font-normal">(Tem/Não
-                                            tem)</span>
-                                    </label>
-                                    <span id="val_ac" class="font-mono text-brand-blue font-bold text-xs">4 (9%)</span>
-                                </div>
-                                <input type="range" id="w_ac" min="1" max="9" value="4" oninput="runAHPSimulation()"
-                                    class="w-full accent-brand-blue cursor-pointer bg-slate-700 rounded-lg h-1.5">
-                            </div>
-
-                            <!-- 9. PREÇO -->
-                            <div>
-                                <div class="flex justify-between items-center text-xs sm:text-sm font-medium mb-1">
-                                    <label for="w_preco" class="text-slate-200 flex items-center gap-2">
-                                        <i class="fa-solid fa-euro-sign text-emerald-400 w-4 text-center"></i> 9. Preço
-                                        Mensalidade
-                                    </label>
-                                    <span id="val_preco" class="font-mono text-brand-blue font-bold text-xs">8
-                                        (18%)</span>
-                                </div>
-                                <input type="range" id="w_preco" min="1" max="9" value="8" oninput="runAHPSimulation()"
-                                    class="w-full accent-brand-blue cursor-pointer bg-slate-700 rounded-lg h-1.5">
-                            </div>
-                        </div>
-
-                        <!-- Additional Option Checkbox -->
-                        <div
-                            class="pt-4 border-t border-slate-700/80 flex flex-wrap items-center justify-between gap-2">
-                            <div class="flex items-center gap-2">
-                                <input type="checkbox" id="includeSubsidized" checked onchange="runAHPSimulation()"
-                                    class="rounded border-slate-600 text-brand-blue focus:ring-brand-blue">
-                                <label for="includeSubsidized" class="text-xs text-slate-300">Incluir espaços
-                                    subsidiados
-                                    por candidatura</label>
-                            </div>
-                            <button onclick="resetSliders()"
-                                class="text-xs text-slate-400 hover:text-white underline">Repor
-                                pesos</button>
-                        </div>
-
-                        <!-- Action Buttons -->
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <button onclick="saveSimulationToHistory()"
-                                class="w-full py-3 bg-slate-700 hover:bg-slate-600 text-white font-semibold rounded-lg text-sm transition-all flex items-center justify-center gap-2">
-                                <i class="fa-regular fa-bookmark"></i>
-                                <span>Guardar na Área de Cliente</span>
-                            </button>
-                            <button onclick="exportResults()"
-                                class="w-full py-3 bg-brand-blue hover:bg-blue-600 text-white font-semibold rounded-lg text-sm transition-all flex items-center justify-center gap-2 shadow-lg shadow-blue-500/20">
-                                <i class="fa-solid fa-file-export"></i>
-                                <span>Exportar Relatório AHP</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Simulation Dynamic Results Output (Right) -->
-                    <div
-                        class="lg:col-span-6 bg-slate-800/40 p-6 sm:p-8 rounded-2xl border border-slate-700/80 space-y-6">
-                        <div class="flex flex-wrap items-center justify-between gap-2">
-                            <div>
-                                <h3 class="text-lg font-bold font-serif-title text-white">
-                                    Ranking de Recomendação AHP
-                                </h3>
-                                <p id="simEvaluatedCount" class="text-xs text-slate-400">A analisar alternativas...</p>
-                            </div>
-                            <span id="crBadge"
-                                class="text-xs font-mono px-2.5 py-1 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-full font-semibold">
-                                Coerência CR = 0.000 &check;
-                            </span>
-                        </div>
-
-                        <!-- Dynamic Bars Container -->
-                        <div id="ahpResultsContainer" class="space-y-4">
-                            <!-- Content generated dynamically by JS -->
-                        </div>
-
-                        <!-- Strong and Weak Points Box for Winning Alternative -->
-                        <div id="winnerAnalysisBox"
-                            class="p-5 rounded-xl bg-slate-900 border border-slate-700 space-y-3">
-                            <!-- JS injected details -->
-                        </div>
-                    </div>
+            <!-- Embedded Flutter Web App -->
+            <div class="relative bg-slate-950 border border-slate-700 rounded-2xl overflow-hidden shadow-2xl">
+                <div id="flutterLoadingOverlay"
+                    class="absolute inset-0 z-10 bg-slate-900 flex flex-col items-center justify-center gap-3 text-slate-300">
+                    <div class="w-10 h-10 border-4 border-brand-blue border-t-transparent rounded-full animate-spin"></div>
+                    <p class="text-sm font-medium">A carregar Aplicação Nucleus (AHP + Firebase)...</p>
                 </div>
+                <iframe id="flutterAppFrame"
+                    src="/app/"
+                    title="Simulador AHP Nucleus"
+                    allow="geolocation; clipboard-write"
+                    loading="lazy"
+                    onload="document.getElementById('flutterLoadingOverlay')?.classList.add('hidden')"
+                    class="w-full h-[780px] border-0 bg-white">
+                </iframe>
             </div>
         </div>
     </section>
+
+    <script>
+        if (window.location.protocol === 'file:') {
+            document.getElementById('fileProtocolWarning')?.classList.remove('hidden');
+            document.getElementById('flutterLoadingOverlay')?.classList.add('hidden');
+        }
+    </script>
 
     <!-- CONSULTORIA & SOLUÇÕES -->
     <section id="servicos" class="py-20 max-w-7xl mx-auto px-6">
@@ -989,7 +735,6 @@
                 <a href="#simulador" onclick="goToSimulator(event)" class="hover:text-white transition-colors">Simulador
                     AHP</a>
                 <a href="#processo" class="hover:text-white transition-colors">Critérios & App</a>
-                <button onclick="openClientModal()" class="hover:text-white transition-colors">Área de Cliente</button>
             </div>
 
             <div class="text-xs text-slate-500">
