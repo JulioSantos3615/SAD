@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-PT" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nucleus — Simulador AHP</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#1d63ed',
+                            darkBlue: '#1548b8',
+                            lightBlue: '#ebf2ff',
+                            darkBg: '#0f172a',
+                            darkCard: '#1e293b',
+                            slateBorder: '#334155'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'Georgia', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body id="flutterAppBody"
+    class="bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100 min-h-screen flex flex-col antialiased selection:bg-blue-600 selection:text-white">
+
+    <iframe id="flutterAppFrame"
+        src="/app/"
+        title="Simulador AHP Nucleus"
+        allow="geolocation; clipboard-write"
+        loading="lazy"
+        onload="document.getElementById('flutterLoadingOverlay')?.classList.add('hidden')"
+        class="w-full h-[780px] border-0 bg-white">
+    </iframe>
+
+    <script>
+        if (window.location.protocol === 'file:') {
+            document.getElementById('fileProtocolWarning')?.classList.remove('hidden');
+            document.getElementById('flutterLoadingOverlay')?.classList.add('hidden');
+        }
+    </script>
+
+</body>
+
+</html>
