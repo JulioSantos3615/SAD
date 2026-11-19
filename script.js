@@ -195,6 +195,9 @@ function renderSpacesDirectory() {
         const meetingPrice = parseNumericValue(item['SALA DE REUNIOES']);
         const estNivel = parseInt(item['ESTACIONAMENTO'], 10) || 1;
         const transNivel = parseInt(item['TRANSPORTES'], 10) || 1;
+        const wifiNivel = parseInt(item['WiFi'], 10) || 1;
+        const lazerNivel = parseInt(item['AREA DE LAZER'], 10) || 1;
+        const acNivel = parseInt(item['AC'], 10) || 1;
 
         const badgePrice = isSpecial888(coworkPrice) || isSpecial888(privadoPrice)
             ? '<span class="text-xs font-mono text-emerald-600 dark:text-emerald-400 font-semibold"><i class="fa-solid fa-award mr-1"></i>Por candidatura</span>'
@@ -206,8 +209,9 @@ function renderSpacesDirectory() {
 
         const tags = [];
         if (isTruthyFlag(item['RECEPCIONISTA'])) tags.push('Recepção');
-        if (isTruthyFlag(item['WiFi'])) tags.push('Wi-Fi');
-        if (isTruthyFlag(item['AC'])) tags.push('AC');
+        tags.push(`Wi-Fi ${wifiNivel}/9`);
+        tags.push(`Lazer ${lazerNivel}/9`);
+        tags.push(`AC ${acNivel}/9`);
         if (isSpecial888(meetingPrice)) tags.push('Sala Reuniões Incluída');
         tags.push(`Estac. ${estNivel}/4`);
         tags.push(`Transp. ${transNivel}/4`);
@@ -826,9 +830,9 @@ function normalizeFirestoreSpace(id, raw) {
         'SALA DE REUNIOES': raw['SALA DE REUNIOES'] ?? raw.precoSalaReunioes ?? null,
         'Modelo de Preço': raw['Modelo de Preço'] ?? raw.modeloPreco ?? 'Mensalidade',
         'RECEPCIONISTA': raw['RECEPCIONISTA'] ?? (raw.temRecepcionista ? '1' : '0'),
-        'WiFi': raw['WiFi'] ?? (raw.temWiFi ? '1' : '0'),
-        'AC': raw['AC'] ?? (raw.temAc ? '1' : '0'),
-        'AREA DE LAZER': raw['AREA DE LAZER'] ?? (raw.temAreaLazer ? '1' : '0'),
+        'WiFi': raw['WiFi'] ?? raw.nivelWiFi ?? (raw.temWiFi ? 7 : 1),
+        'AC': raw['AC'] ?? raw.nivelAc ?? (raw.temAc ? 7 : 1),
+        'AREA DE LAZER': raw['AREA DE LAZER'] ?? raw.nivelAreaLazer ?? (raw.temAreaLazer ? 6 : 1),
         'ESTACIONAMENTO': raw['ESTACIONAMENTO'] ?? raw.nivelEstacionamento ?? 1,
         'TRANSPORTES': raw['TRANSPORTES'] ?? raw.nivelTransportes ?? 1,
         'CANTINA/REST': raw['CANTINA/REST'] ?? raw.nivelCantina ?? 1
