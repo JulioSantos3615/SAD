@@ -64,8 +64,6 @@
                 class="hidden md:flex items-center space-x-8 text-sm font-semibold text-slate-600 dark:text-slate-300 tracking-wide uppercase">
                 <a href="#sobre" class="hover:text-brand-blue dark:hover:text-blue-400 transition-colors">Sobre</a>
                 <a href="#espacos" class="hover:text-brand-blue dark:hover:text-blue-400 transition-colors">Espaços</a>
-                <a href="#simulador" onclick="goToSimulator(event)"
-                    class="hover:text-brand-blue dark:hover:text-blue-400 transition-colors">Simulador AHP</a>
                 <a href="#servicos"
                     class="hover:text-brand-blue dark:hover:text-blue-400 transition-colors">Consultoria</a>
                 <a href="#processo" class="hover:text-brand-blue dark:hover:text-blue-400 transition-colors">Critérios &
@@ -83,7 +81,7 @@
                 </button>
 
                 <!-- Primary CTA -->
-                <a href="#simulador" onclick="goToSimulator(event)"
+                <a href="nucleus.html" target="_blank" rel="noopener"
                     class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-brand-blue text-white font-medium text-sm hover:bg-blue-700 transition-all shadow-sm shadow-blue-500/20 active:scale-95">
                     Simular agora
                 </a>
@@ -103,13 +101,13 @@
                 class="block text-slate-700 dark:text-slate-200 font-medium hover:text-brand-blue">Sobre</a>
             <a href="#espacos" onclick="toggleMobileMenu()"
                 class="block text-slate-700 dark:text-slate-200 font-medium hover:text-brand-blue">Espaços</a>
-            <a href="#simulador" onclick="toggleMobileMenu(); goToSimulator(event);"
+            <a href="nucleus.html" target="_blank" rel="noopener" onclick="toggleMobileMenu()"
                 class="block text-slate-700 dark:text-slate-200 font-medium hover:text-brand-blue">Simulador AHP</a>
             <a href="#servicos" onclick="toggleMobileMenu()"
                 class="block text-slate-700 dark:text-slate-200 font-medium hover:text-brand-blue">Consultoria</a>
             <a href="#processo" onclick="toggleMobileMenu()"
                 class="block text-slate-700 dark:text-slate-200 font-medium hover:text-brand-blue">Critérios & App</a>
-            <a href="#simulador" onclick="toggleMobileMenu(); goToSimulator(event);"
+            <a href="nucleus.html" target="_blank" rel="noopener" onclick="toggleMobileMenu()"
                 class="block text-center py-2 bg-brand-blue text-white rounded-lg font-medium">Simular agora</a>
         </div>
     </header>
@@ -139,7 +137,7 @@
         <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-end pt-4">
             <!-- Left: Buttons -->
             <div class="md:col-span-6 flex flex-wrap items-center gap-4">
-                <a href="#simulador" onclick="goToSimulator(event)"
+                <a href="nucleus.html" target="_blank" rel="noopener"
                     class="px-8 py-4 bg-brand-blue hover:bg-blue-700 text-white font-semibold text-base rounded-lg transition-all shadow-lg shadow-blue-500/25 flex items-center gap-3">
                     <span>Aceder ao Simulador AHP</span>
                     <i class="fa-solid fa-arrow-right text-xs"></i>
@@ -270,13 +268,13 @@
                         Ideal
                     </div>
 
-                    <div class="w-0.5 h-6 bg-slate-300 dark:bg-slate-600"></div>
+                    <div class="w-full h-0.5 bg-brand-blue/60 dark:bg-blue-500/50 rounded-full"></div>
 
                     <!-- Criteria Level (9 criteria grouped) -->
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 w-full">
                         <div
                             class="bg-amber-100 dark:bg-amber-950/60 border border-amber-300 dark:border-amber-800 text-amber-900 dark:text-amber-200 p-3 rounded-lg text-center text-xs font-semibold">
-                            Custos & Salas<br><span class="font-normal opacity-80">Preço · Sala de Reuniões</span>
+                            Renda mensal & Sala de Reuniões<br><span class="font-normal opacity-80">Preço</span>
                         </div>
                         <div
                             class="bg-amber-100 dark:bg-amber-950/60 border border-amber-300 dark:border-amber-800 text-amber-900 dark:text-amber-200 p-3 rounded-lg text-center text-xs font-semibold">
@@ -295,7 +293,7 @@
                         </div>
                     </div>
 
-                    <div class="w-0.5 h-6 bg-slate-300 dark:bg-slate-600"></div>
+                    <div class="w-full h-0.5 bg-brand-blue/60 dark:bg-blue-500/50 rounded-full"></div>
 
                     <!-- Alternatives Level -->
                     <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 w-full">
@@ -381,75 +379,6 @@
             </button>
         </div>
     </section>
-
-    <!-- SIMULADOR AHP INTERATIVO -->
-    <section id="simulador" class="py-20 bg-slate-900 text-white relative">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10">
-                <div class="max-w-3xl">
-                    <div
-                        class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-brand-blue text-xs font-semibold uppercase tracking-wider mb-4">
-                        <i class="fa-solid fa-microchip"></i> Área de Cliente • AHP Engine
-                    </div>
-                    <h2 class="text-3xl sm:text-5xl font-serif-title font-bold text-white mb-4">
-                        Simulador de Escolha de Espaço
-                    </h2>
-                    <p class="text-slate-400 text-base sm:text-lg">
-                        Selecione a modalidade e filtros pretendidos e atribua a importância a cada um dos
-                        critérios. O motor AHP encontra o espaço indicado para si ou a sua empresa.
-                    </p>
-                </div>
-
-                <!-- Flutter Web App Actions -->
-                <div class="flex flex-wrap items-center gap-3 shrink-0">
-                    <div class="bg-slate-800/90 border border-slate-700 rounded-xl px-4 py-2.5 flex items-center gap-2.5 text-xs">
-                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                        <span class="text-slate-200 font-medium">Motor Dart/Flutter + Firebase</span>
-                    </div>
-                    <a href="/app/" target="_blank" rel="noopener"
-                        class="px-4 py-2.5 bg-brand-blue hover:bg-blue-600 text-white font-semibold rounded-xl text-xs transition-all shadow-lg shadow-blue-500/20 flex items-center gap-2">
-                        <i class="fa-solid fa-up-right-from-square"></i>
-                        <span>Abrir em Ecrã Completo</span>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Warning if opened via file:// -->
-            <div id="fileProtocolWarning"
-                class="hidden mb-6 p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-200 text-xs sm:text-sm flex items-start gap-3">
-                <i class="fa-solid fa-triangle-exclamation text-amber-400 mt-0.5"></i>
-                <div>
-                    <strong>Servidor HTTP necessário:</strong> O simulador Flutter Web não pode ser executado diretamente
-                    via <code>file://</code>. Inicie um servidor local (ex.: <code>python -m http.server 8080</code> na
-                    pasta do site) e aceda através de <code>http://localhost:8080/main.html</code>.
-                </div>
-            </div>
-
-            <!-- Embedded Flutter Web App -->
-            <div class="relative bg-slate-950 border border-slate-700 rounded-2xl overflow-hidden shadow-2xl">
-                <div id="flutterLoadingOverlay"
-                    class="absolute inset-0 z-10 bg-slate-900 flex flex-col items-center justify-center gap-3 text-slate-300">
-                    <div class="w-10 h-10 border-4 border-brand-blue border-t-transparent rounded-full animate-spin"></div>
-                    <p class="text-sm font-medium">A carregar Aplicação Nucleus (AHP + Firebase)...</p>
-                </div>
-                <iframe id="flutterAppFrame"
-                    src="/app/"
-                    title="Simulador AHP Nucleus"
-                    allow="geolocation; clipboard-write"
-                    loading="lazy"
-                    onload="document.getElementById('flutterLoadingOverlay')?.classList.add('hidden')"
-                    class="w-full h-[780px] border-0 bg-white">
-                </iframe>
-            </div>
-        </div>
-    </section>
-
-    <script>
-        if (window.location.protocol === 'file:') {
-            document.getElementById('fileProtocolWarning')?.classList.remove('hidden');
-            document.getElementById('flutterLoadingOverlay')?.classList.add('hidden');
-        }
-    </script>
 
     <!-- CONSULTORIA & SOLUÇÕES -->
     <section id="servicos" class="py-20 max-w-7xl mx-auto px-6">
@@ -701,11 +630,13 @@
                                     instalado (Tem / Não tem)</td>
                                 <td class="py-2.5 text-right font-mono font-bold text-brand-blue">Binário (0 / 1)</td>
                             </tr>
-                            <tr class="bg-slate-50 dark:bg-slate-800/80 font-bold">
-                                <td class="py-3 px-2 text-slate-900 dark:text-white">9. Preço Mensalidade</td>
-                                <td class="py-3 px-2 font-normal text-slate-600 dark:text-slate-300">Valor mensal da
+                            <tr>
+                                <td class="py-2.5 font-medium">9. Preço Mensalidade</td>
+                                <td class="py-2.5 text-slate-600 dark:text-slate-400">Valor mensal da
                                     modalidade ou espaço subsidiado / acessível apenas por candidatura</td>
-                                <td class="py-3 px-2 text-right font-mono text-emerald-600 dark:text-emerald-400">Custo
+                                <td
+                                    class="py-2.5 text-right font-mono font-bold text-emerald-600 dark:text-emerald-400">
+                                    Custo
                                     / Candidatura</td>
                             </tr>
                         </tbody>
@@ -732,7 +663,8 @@
             <div class="flex flex-wrap items-center space-x-6 text-xs font-medium">
                 <a href="#sobre" class="hover:text-white transition-colors">Sobre</a>
                 <a href="#espacos" class="hover:text-white transition-colors">Espaços</a>
-                <a href="#simulador" onclick="goToSimulator(event)" class="hover:text-white transition-colors">Simulador
+                <a href="nucleus.html" target="_blank" rel="noopener"
+                    class="hover:text-white transition-colors">Simulador
                     AHP</a>
                 <a href="#processo" class="hover:text-white transition-colors">Critérios & App</a>
             </div>
@@ -743,185 +675,11 @@
         </div>
     </footer>
 
-    <!-- CLIENT AREA MODAL (Login / Registo / Histórico) -->
-    <div id="clientModal"
-        class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
-        <div
-            class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-lg w-full p-6 shadow-2xl relative max-h-[90vh] overflow-y-auto">
-            <button onclick="closeClientModal()"
-                class="absolute right-4 top-4 text-slate-400 hover:text-slate-600 dark:hover:text-white">
-                <i class="fa-solid fa-xmark text-lg"></i>
-            </button>
-
-            <div class="flex items-center gap-3 mb-4">
-                <div
-                    class="w-10 h-10 bg-blue-100 dark:bg-blue-900/40 text-brand-blue rounded-full flex items-center justify-center text-lg">
-                    <i class="fa-regular fa-user"></i>
-                </div>
-                <div>
-                    <h3 class="text-xl font-bold font-serif-title text-slate-900 dark:text-white">Área de Cliente
-                        Nucleus</h3>
-                    <p class="text-xs text-slate-500 dark:text-slate-400">Acesso sincronizado com a lógica do Simulador
-                        AHP e App Android</p>
-                </div>
-            </div>
-
-            <!-- Unauthenticated View -->
-            <div id="clientAuthView" class="space-y-4">
-                <div id="clientAuthNotice"
-                    class="hidden p-3 rounded-lg bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800 text-xs text-amber-800 dark:text-amber-200 flex items-center gap-2">
-                    <i class="fa-solid fa-lock text-amber-500"></i>
-                    <span>Inicie sessão ou crie uma conta para desbloquear o Simulador AHP na Área de Cliente.</span>
-                </div>
-                <div class="flex border-b border-slate-200 dark:border-slate-800 text-xs font-semibold">
-                    <button id="tabLoginBtn" onclick="switchClientTab('login')"
-                        class="px-4 py-2 border-b-2 border-brand-blue text-brand-blue">Entrar</button>
-                    <button id="tabRegisterBtn" onclick="switchClientTab('register')"
-                        class="px-4 py-2 border-b-2 border-transparent text-slate-500 hover:text-slate-700 dark:hover:text-slate-300">Criar
-                        Conta</button>
-                </div>
-
-                <form id="clientLoginForm" onsubmit="handleClientLogin(event)" class="space-y-3">
-                    <div>
-                        <label class="block text-xs font-medium text-slate-600 dark:text-slate-300 mb-1">Email
-                            empresarial</label>
-                        <input type="email" id="loginEmail" required placeholder="nome@empresa.pt"
-                            class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-blue">
-                    </div>
-                    <div>
-                        <label
-                            class="block text-xs font-medium text-slate-600 dark:text-slate-300 mb-1">Palavra-passe</label>
-                        <input type="password" id="loginPassword" required placeholder="••••••••"
-                            class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-blue">
-                    </div>
-                    <div class="flex items-center justify-between pt-1">
-                        <button type="button" onclick="fillDemoClient()"
-                            class="text-xs text-brand-blue hover:underline">Usar conta demonstração</button>
-                        <button type="submit"
-                            class="px-5 py-2 bg-brand-blue hover:bg-blue-700 text-white rounded-lg text-xs font-semibold">Entrar
-                            no Simulador</button>
-                    </div>
-                </form>
-
-                <form id="clientRegisterForm" onsubmit="handleClientRegister(event)" class="space-y-3 hidden">
-                    <div>
-                        <label class="block text-xs font-medium text-slate-600 dark:text-slate-300 mb-1">Nome /
-                            Empresa</label>
-                        <input type="text" id="regName" required placeholder="Ex: TechPorto Lda"
-                            class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-blue">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-medium text-slate-600 dark:text-slate-300 mb-1">Perfil de
-                            Procura</label>
-                        <select id="regProfile"
-                            class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-blue">
-                            <option value="Startup (Incubadora / Cowork)">Startup (Incubadora / Cowork)</option>
-                            <option value="PME (Escritório Privado)">PME (Escritório Privado)</option>
-                            <option value="Empresa Consolidada (Parque / Armazém)">Empresa Consolidada (Parque /
-                                Armazém)</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-medium text-slate-600 dark:text-slate-300 mb-1">Email</label>
-                        <input type="email" id="regEmail" required placeholder="contacto@empresa.pt"
-                            class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-blue">
-                    </div>
-                    <div>
-                        <label
-                            class="block text-xs font-medium text-slate-600 dark:text-slate-300 mb-1">Palavra-passe</label>
-                        <input type="password" id="regPassword" required minlength="4" placeholder="Mínimo 4 caracteres"
-                            class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-blue">
-                    </div>
-                    <div class="flex justify-end pt-1">
-                        <button type="submit"
-                            class="px-5 py-2 bg-brand-blue hover:bg-blue-700 text-white rounded-lg text-xs font-semibold">Criar
-                            Conta & Aceder</button>
-                    </div>
-                </form>
-            </div>
-
-            <!-- Authenticated View -->
-            <div id="clientDashboardView" class="hidden space-y-4">
-                <div
-                    class="p-3.5 rounded-xl bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800 flex items-center justify-between">
-                    <div>
-                        <div id="clientProfileName" class="text-sm font-bold text-slate-900 dark:text-white"></div>
-                        <div id="clientProfileMeta" class="text-xs text-slate-600 dark:text-slate-400"></div>
-                    </div>
-                    <button onclick="handleClientLogout()"
-                        class="text-xs text-red-600 dark:text-red-400 hover:underline font-medium">Terminar
-                        sessão</button>
-                </div>
-
-                <div>
-                    <div class="flex items-center justify-between mb-2">
-                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500">Simulações Guardadas</h4>
-                        <button onclick="clearSimulationHistory()"
-                            class="text-[11px] text-slate-400 hover:text-red-500">Limpar histórico</button>
-                    </div>
-                    <div id="clientHistoryList" class="space-y-2 max-h-56 overflow-y-auto">
-                        <!-- Rendered by script.js -->
-                    </div>
-                </div>
-
-                <div class="flex justify-end gap-2 pt-2 border-t border-slate-200 dark:border-slate-800">
-                    <button
-                        onclick="closeClientModal(); document.getElementById('simulador').scrollIntoView({behavior:'smooth'});"
-                        class="px-4 py-2 bg-brand-blue text-white rounded-lg text-xs font-semibold hover:bg-blue-600">
-                        Ir para o Simulador AHP
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Export Report Toast Modal (Interactive Feedback) -->
-    <div id="exportModal"
-        class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
-        <div
-            class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-lg w-full p-6 shadow-2xl relative">
-            <button onclick="closeExportModal()"
-                class="absolute right-4 top-4 text-slate-400 hover:text-slate-600 dark:hover:text-white">
-                <i class="fa-solid fa-xmark text-lg"></i>
-            </button>
-
-            <div
-                class="w-12 h-12 bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 rounded-full flex items-center justify-center text-xl mb-4">
-                <i class="fa-solid fa-file-lines"></i>
-            </div>
-
-            <h3 class="text-xl font-bold font-serif-title text-slate-900 dark:text-white mb-2">
-                Relatório de Recomendação Nucleus (AHP)
-            </h3>
-            <p class="text-xs text-slate-600 dark:text-slate-400 mb-4">
-                Resumo executivo gerado a partir dos 9 critérios ponderados na sua Área de Cliente. Pode copiar os dados
-                ou consultar o espaço na app Android.
-            </p>
-
-            <div id="modalReportContent"
-                class="p-4 bg-slate-50 dark:bg-slate-800 rounded-lg text-xs font-mono space-y-1.5 mb-6 border border-slate-200 dark:border-slate-700 max-h-60 overflow-y-auto">
-                <!-- Content set by JS -->
-            </div>
-
-            <div class="flex justify-end gap-3">
-                <button onclick="closeExportModal()"
-                    class="px-4 py-2 bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg text-xs font-medium">
-                    Fechar
-                </button>
-                <button onclick="copyReportToClipboard()"
-                    class="px-4 py-2 bg-brand-blue text-white rounded-lg text-xs font-semibold hover:bg-blue-600 flex items-center gap-1.5">
-                    <i class="fa-regular fa-copy"></i>
-                    <span>Copiar Relatório JSON</span>
-                </button>
-            </div>
-        </div>
-    </div>
-
     <!-- FIREBASE JS SDK (Compat) + DATA & APPLICATION LOGIC -->
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
     <script src="empresas-data.js"></script>
-    <script src="script.js"></script>
+    <script src="script.js?v=3"></script>
 </body>
 
 </html>

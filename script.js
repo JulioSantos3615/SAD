@@ -232,7 +232,7 @@ function renderSpacesDirectory() {
                 </div>
                 <div class="px-6 py-4 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center text-xs">
                     <span class="text-slate-500">${item['Modelo de Preço'] || 'Mensalidade'}</span>
-                    <button onclick="selectSpaceInSim('${safeEmpresaAttr}', '${tipologia.replace(/'/g, "\\'")}', '${localizacao.replace(/'/g, "\\'")}')" class="text-brand-blue hover:underline font-semibold">Testar no Simulador &rarr;</button>
+                    <a href="nucleus.html" target="_blank" rel="noopener" class="text-brand-blue hover:underline font-semibold">Testar no Simulador &rarr;</a>
                 </div>
             </div>
         `;
@@ -270,6 +270,10 @@ function applySpaceSelectionInSim(empresa, tipologia, localizacao) {
 }
 
 function selectSpaceInSim(empresa, tipologia, localizacao) {
+    if (document.getElementById('flutterAppFrame')) {
+        document.getElementById('simulador').scrollIntoView({ behavior: 'smooth' });
+        return;
+    }
     if (!getCurrentClient()) {
         pendingSpaceSelection = { empresa, tipologia, localizacao };
         pendingRedirectToSim = true;
@@ -619,6 +623,10 @@ function renderClientHistory() {
 }
 
 function openClientModal(tab = 'login', showNotice = false) {
+    if (document.getElementById('flutterAppFrame')) {
+        document.getElementById('simulador').scrollIntoView({ behavior: 'smooth' });
+        return;
+    }
     updateClientUI();
     const notice = document.getElementById('clientAuthNotice');
     if (notice) {
