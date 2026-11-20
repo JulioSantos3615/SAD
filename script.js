@@ -129,7 +129,7 @@ function toggleMobileMenu() {
     document.getElementById('mobileMenu').classList.toggle('hidden');
 }
 
-// --- Diretório de Espaços (68 registos reais) ---
+// --- Diretório de Espaços ---
 function getFilteredSpaces() {
     const searchVal = (document.getElementById('searchInput')?.value || '').toLowerCase().trim();
     const regionVal = document.getElementById('regionFilter')?.value || 'all';
@@ -157,6 +157,10 @@ function renderSpacesDirectory() {
 
     const filtered = getFilteredSpaces();
     const totalAll = dynamicSpacesData.length;
+    const heroCount = document.getElementById('heroSpacesCount');
+    if (heroCount) {
+        heroCount.textContent = `${totalAll} Espaços Mapeados`;
+    }
     const limit = showAllSpaces ? filtered.length : 6;
     const toRender = filtered.slice(0, limit);
 
@@ -293,7 +297,9 @@ function runAHPSimulation(highlightEmpresa = null) {
         lastSimulationResult = null;
         return;
     }
-    const dataset = typeof EMPRESAS_DATA !== 'undefined' ? EMPRESAS_DATA : [];
+    const dataset = dynamicSpacesData.length
+        ? dynamicSpacesData
+        : (typeof EMPRESAS_DATA !== 'undefined' ? EMPRESAS_DATA : []);
     const modalidade = document.getElementById('simModalidade').value;
     const localizacao = document.getElementById('simLocalizacao').value;
     const tipologia = document.getElementById('simTipologia').value;
