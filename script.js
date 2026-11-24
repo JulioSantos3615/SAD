@@ -129,7 +129,7 @@ function toggleMobileMenu() {
     document.getElementById('mobileMenu').classList.toggle('hidden');
 }
 
-// --- Diretório de Espaços (68 registos reais) ---
+// --- Diretório de Espaços ---
 function getFilteredSpaces() {
     const searchVal = (document.getElementById('searchInput')?.value || '').toLowerCase().trim();
     const regionVal = document.getElementById('regionFilter')?.value || 'all';
@@ -157,6 +157,10 @@ function renderSpacesDirectory() {
 
     const filtered = getFilteredSpaces();
     const totalAll = dynamicSpacesData.length;
+    const heroCount = document.getElementById('heroSpacesCount');
+    if (heroCount) {
+        heroCount.textContent = `${totalAll} Espaços Mapeados`;
+    }
     const limit = showAllSpaces ? filtered.length : 6;
     const toRender = filtered.slice(0, limit);
 
@@ -195,6 +199,9 @@ function renderSpacesDirectory() {
         const meetingPrice = parseNumericValue(item['SALA DE REUNIOES']);
         const estNivel = parseInt(item['ESTACIONAMENTO'], 10) || 1;
         const transNivel = parseInt(item['TRANSPORTES'], 10) || 1;
+        const wifiNivel = parseInt(item['WiFi'], 10) || 1;
+        const lazerNivel = parseInt(item['AREA DE LAZER'], 10) || 1;
+        const acNivel = parseInt(item['AC'], 10) || 1;
 
         const badgePrice = isSpecial888(coworkPrice) || isSpecial888(privadoPrice)
             ? '<span class="text-xs font-mono text-emerald-600 dark:text-emerald-400 font-semibold"><i class="fa-solid fa-award mr-1"></i>Por candidatura</span>'
@@ -206,8 +213,9 @@ function renderSpacesDirectory() {
 
         const tags = [];
         if (isTruthyFlag(item['RECEPCIONISTA'])) tags.push('Recepção');
-        if (isTruthyFlag(item['WiFi'])) tags.push('Wi-Fi');
-        if (isTruthyFlag(item['AC'])) tags.push('AC');
+        tags.push(`Wi-Fi ${wifiNivel}/9`);
+        tags.push(`Lazer ${lazerNivel}/9`);
+        tags.push(`AC ${acNivel}/9`);
         if (isSpecial888(meetingPrice)) tags.push('Sala Reuniões Incluída');
         tags.push(`Estac. ${estNivel}/4`);
         tags.push(`Transp. ${transNivel}/4`);
@@ -232,7 +240,7 @@ function renderSpacesDirectory() {
                 </div>
                 <div class="px-6 py-4 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center text-xs">
                     <span class="text-slate-500">${item['Modelo de Preço'] || 'Mensalidade'}</span>
-                    <a href="nucleus.html" target="_blank" class="text-brand-blue hover:underline font-semibold">Testar no Simulador &rarr;</a>
+                    <a href="nucleus.html" target="_blank" rel="noopener" class="text-brand-blue hover:underline font-semibold">Testar no Simulador &rarr;</a>
                 </div>
             </div>
         `;
@@ -270,6 +278,10 @@ function applySpaceSelectionInSim(empresa, tipologia, localizacao) {
 }
 
 function selectSpaceInSim(empresa, tipologia, localizacao) {
+    if (document.getElementById('flutterAppFrame')) {
+        document.getElementById('simulador').scrollIntoView({ behavior: 'smooth' });
+        return;
+    }
     if (!getCurrentClient()) {
         pendingSpaceSelection = { empresa, tipologia, localizacao };
         pendingRedirectToSim = true;
@@ -285,7 +297,9 @@ function runAHPSimulation(highlightEmpresa = null) {
         lastSimulationResult = null;
         return;
     }
-    const dataset = typeof EMPRESAS_DATA !== 'undefined' ? EMPRESAS_DATA : [];
+    const dataset = dynamicSpacesData.length
+        ? dynamicSpacesData
+        : (typeof EMPRESAS_DATA !== 'undefined' ? EMPRESAS_DATA : []);
     const modalidade = document.getElementById('simModalidade').value;
     const localizacao = document.getElementById('simLocalizacao').value;
     const tipologia = document.getElementById('simTipologia').value;
@@ -619,6 +633,10 @@ function renderClientHistory() {
 }
 
 function openClientModal(tab = 'login', showNotice = false) {
+    if (document.getElementById('flutterAppFrame')) {
+        document.getElementById('simulador').scrollIntoView({ behavior: 'smooth' });
+        return;
+    }
     updateClientUI();
     const notice = document.getElementById('clientAuthNotice');
     if (notice) {
@@ -818,9 +836,9 @@ function normalizeFirestoreSpace(id, raw) {
         'SALA DE REUNIOES': raw['SALA DE REUNIOES'] ?? raw.precoSalaReunioes ?? null,
         'Modelo de Preço': raw['Modelo de Preço'] ?? raw.modeloPreco ?? 'Mensalidade',
         'RECEPCIONISTA': raw['RECEPCIONISTA'] ?? (raw.temRecepcionista ? '1' : '0'),
-        'WiFi': raw['WiFi'] ?? (raw.temWiFi ? '1' : '0'),
-        'AC': raw['AC'] ?? (raw.temAc ? '1' : '0'),
-        'AREA DE LAZER': raw['AREA DE LAZER'] ?? (raw.temAreaLazer ? '1' : '0'),
+        'WiFi': raw['WiFi'] ?? raw.nivelWiFi ?? (raw.temWiFi ? 7 : 1),
+        'AC': raw['AC'] ?? raw.nivelAc ?? (raw.temAc ? 7 : 1),
+        'AREA DE LAZER': raw['AREA DE LAZER'] ?? raw.nivelAreaLazer ?? (raw.temAreaLazer ? 6 : 1),
         'ESTACIONAMENTO': raw['ESTACIONAMENTO'] ?? raw.nivelEstacionamento ?? 1,
         'TRANSPORTES': raw['TRANSPORTES'] ?? raw.nivelTransportes ?? 1,
         'CANTINA/REST': raw['CANTINA/REST'] ?? raw.nivelCantina ?? 1

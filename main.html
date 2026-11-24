@@ -81,7 +81,7 @@
                 </button>
 
                 <!-- Primary CTA -->
-                <a href="nucleus.html" target="_blank" 
+                <a href="nucleus.html" target="_blank" rel="noopener"
                     class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-brand-blue text-white font-medium text-sm hover:bg-blue-700 transition-all shadow-sm shadow-blue-500/20 active:scale-95">
                     Simular agora
                 </a>
@@ -101,13 +101,13 @@
                 class="block text-slate-700 dark:text-slate-200 font-medium hover:text-brand-blue">Sobre</a>
             <a href="#espacos" onclick="toggleMobileMenu()"
                 class="block text-slate-700 dark:text-slate-200 font-medium hover:text-brand-blue">Espaços</a>
-            <a href="nucleus.html" target="_blank" 
+            <a href="nucleus.html" target="_blank" rel="noopener" onclick="toggleMobileMenu()"
                 class="block text-slate-700 dark:text-slate-200 font-medium hover:text-brand-blue">Simulador AHP</a>
             <a href="#servicos" onclick="toggleMobileMenu()"
                 class="block text-slate-700 dark:text-slate-200 font-medium hover:text-brand-blue">Consultoria</a>
             <a href="#processo" onclick="toggleMobileMenu()"
                 class="block text-slate-700 dark:text-slate-200 font-medium hover:text-brand-blue">Critérios & App</a>
-            <a href="nucleus.html" target="_blank" 
+            <a href="nucleus.html" target="_blank" rel="noopener" onclick="toggleMobileMenu()"
                 class="block text-center py-2 bg-brand-blue text-white rounded-lg font-medium">Simular agora</a>
         </div>
     </header>
@@ -137,7 +137,7 @@
         <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-end pt-4">
             <!-- Left: Buttons -->
             <div class="md:col-span-6 flex flex-wrap items-center gap-4">
-                <a href="nucleus.html" target="_blank" 
+                <a href="nucleus.html" target="_blank" rel="noopener"
                     class="px-8 py-4 bg-brand-blue hover:bg-blue-700 text-white font-semibold text-base rounded-lg transition-all shadow-lg shadow-blue-500/25 flex items-center gap-3">
                     <span>Aceder ao Simulador AHP</span>
                     <i class="fa-solid fa-arrow-right text-xs"></i>
@@ -177,7 +177,7 @@
                 <div class="pt-4 md:pt-0 md:pl-8">
                     <div class="text-brand-blue font-mono text-sm uppercase mb-2 font-semibold"><i
                             class="fa-solid fa-building mr-2"></i>Base de Dados Ativa</div>
-                    <div class="text-3xl font-bold font-serif-title mb-1">68 Espaços Mapeados</div>
+                    <div id="heroSpacesCount" class="text-3xl font-bold font-serif-title mb-1">Espaços Mapeados</div>
                     <p class="text-xs text-slate-400">Incubadoras, coworkings, business centers e parques empresariais
                         no Grande Porto.</p>
                 </div>
@@ -268,13 +268,13 @@
                         Ideal
                     </div>
 
-                    <div class="w-0.5 h-6 bg-slate-300 dark:bg-slate-600"></div>
+                    <div class="w-full h-0.5 bg-brand-blue/60 dark:bg-blue-500/50 rounded-full"></div>
 
                     <!-- Criteria Level (9 criteria grouped) -->
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 w-full">
                         <div
                             class="bg-amber-100 dark:bg-amber-950/60 border border-amber-300 dark:border-amber-800 text-amber-900 dark:text-amber-200 p-3 rounded-lg text-center text-xs font-semibold">
-                            Custos & Salas<br><span class="font-normal opacity-80">Preço · Sala de Reuniões</span>
+                            Renda mensal & Sala de Reuniões<br><span class="font-normal opacity-80">Preço</span>
                         </div>
                         <div
                             class="bg-amber-100 dark:bg-amber-950/60 border border-amber-300 dark:border-amber-800 text-amber-900 dark:text-amber-200 p-3 rounded-lg text-center text-xs font-semibold">
@@ -293,7 +293,7 @@
                         </div>
                     </div>
 
-                    <div class="w-0.5 h-6 bg-slate-300 dark:bg-slate-600"></div>
+                    <div class="w-full h-0.5 bg-brand-blue/60 dark:bg-blue-500/50 rounded-full"></div>
 
                     <!-- Alternatives Level -->
                     <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 w-full">
@@ -380,9 +380,6 @@
         </div>
     </section>
 
-    <!-- Simulador AHP Antes!!! -->
-
-
     <!-- CONSULTORIA & SOLUÇÕES -->
     <section id="servicos" class="py-20 max-w-7xl mx-auto px-6">
         <div class="max-w-3xl mb-16">
@@ -458,7 +455,7 @@
                     <h4 class="text-xl font-bold font-serif-title mt-1 mb-3 text-slate-900 dark:text-white">Motor AHP &
                         Dados</h4>
                     <ul class="text-xs text-slate-600 dark:text-slate-400 space-y-2 list-disc list-inside">
-                        <li>Execução sobre base de dados de 68 espaços</li>
+                        <li>Execução sobre a base de dados de espaços mapeados</li>
                         <li>Ponderação exata dos 9 critérios operacionais</li>
                         <li>Relatórios executivos prontos a partilhar</li>
                     </ul>
@@ -538,7 +535,7 @@
                         Critérios</h4>
                     <ul class="text-xs text-slate-600 dark:text-slate-400 space-y-1.5 list-disc list-inside">
                         <li>Atribuição de peso a cada critério</li>
-                        <li>Execução do algoritmo AHP sobre os 68 espaços</li>
+                        <li>Execução do algoritmo AHP sobre os espaços mapeados</li>
                         <li>Gravação e comparação de cenários no histórico</li>
                     </ul>
                 </div>
@@ -582,62 +579,63 @@
                         <tbody
                             class="divide-y divide-slate-100 dark:divide-slate-800 text-slate-700 dark:text-slate-300">
                             <tr>
-                                <td class="py-2.5 px-2 font-medium">1. Recepcionista</td>
-                                <td class="py-2.5 px-2 text-slate-600 dark:text-slate-400">Presença de atendimento presencial
+                                <td class="py-2.5 font-medium">1. Recepcionista</td>
+                                <td class="py-2.5 text-slate-600 dark:text-slate-400">Presença de atendimento presencial
                                     (Tem / Não tem)</td>
-                                <td class="py-2.5 px-2 text-right font-mono font-bold text-brand-blue">Binário (0 / 1)</td>
+                                <td class="py-2.5 text-right font-mono font-bold text-brand-blue">Binário (0 / 1)</td>
                             </tr>
                             <tr>
-                                <td class="py-2.5 px-2 font-medium">2. WiFi</td>
-                                <td class="py-2.5 px-2 text-slate-600 dark:text-slate-400">Disponibilidade de internet sem
-                                    fios no espaço (Tem / Não tem)</td>
-                                <td class="py-2.5 px-2 text-right font-mono font-bold text-brand-blue">Binário (0 / 1)</td>
+                                <td class="py-2.5 font-medium">2. WiFi (1 a 9)</td>
+                                <td class="py-2.5 text-slate-600 dark:text-slate-400">Qualidade e velocidade da
+                                    infraestrutura Wi-Fi / fibra empresarial</td>
+                                <td class="py-2.5 text-right font-mono font-bold text-brand-blue">Escala 1–9</td>
                             </tr>
                             <tr>
-                                <td class="py-2.5 px-2 font-medium">3. Sala de Reuniões</td>
-                                <td class="py-2.5 px-2 text-slate-600 dark:text-slate-400">Valor/hora; ou
+                                <td class="py-2.5 font-medium">3. Sala de Reuniões</td>
+                                <td class="py-2.5 text-slate-600 dark:text-slate-400">Valor/hora; ou
                                     tempo/mês incluído na mensalidade</td>
                                 <td
-                                    class="py-2.5 px-2 text-right font-mono font-bold text-emerald-600 dark:text-emerald-400">
+                                    class="py-2.5 text-right font-mono font-bold text-emerald-600 dark:text-emerald-400">
                                     Custo / Incluído</td>
                             </tr>
                             <tr>
-                                <td class="py-2.5 px-2 font-medium">4. Estacionamento (1 a 4)</td>
-                                <td class="py-2.5 px-2 text-slate-600 dark:text-slate-400">Incluído/Não incluído,
+                                <td class="py-2.5 font-medium">4. Estacionamento (1 a 4)</td>
+                                <td class="py-2.5 text-slate-600 dark:text-slate-400">Incluído/Não incluído,
                                     ou facilidade de estacionar na periferia
                                 </td>
-                                <td class="py-2.5 px-2 text-right font-mono font-bold text-brand-blue">Escala 1–4</td>
+                                <td class="py-2.5 text-right font-mono font-bold text-brand-blue">Escala 1–4</td>
                             </tr>
                             <tr>
-                                <td class="py-2.5 px-2 font-medium">5. Transportes (1 a 4)</td>
-                                <td class="py-2.5 px-2 text-slate-600 dark:text-slate-400">Classificação por zonas com bus,
+                                <td class="py-2.5 font-medium">5. Transportes (1 a 4)</td>
+                                <td class="py-2.5 text-slate-600 dark:text-slate-400">Classificação por zonas com bus,
                                     metro e/ou comboio</td>
-                                <td class="py-2.5 px-2 text-right font-mono font-bold text-brand-blue">Escala 1–4</td>
+                                <td class="py-2.5 text-right font-mono font-bold text-brand-blue">Escala 1–4</td>
                             </tr>
                             <tr>
-                                <td class="py-2.5 px-2 font-medium">6. Cantina / Rest. (1 a 4)</td>
-                                <td class="py-2.5 px-2 text-slate-600 dark:text-slate-400">Espaços com cantina, restaurante
+                                <td class="py-2.5 font-medium">6. Cantina / Rest. (1 a 4)</td>
+                                <td class="py-2.5 text-slate-600 dark:text-slate-400">Espaços com cantina, restaurante
                                     ou copa</td>
-                                <td class="py-2.5 px-2 text-right font-mono font-bold text-brand-blue">Escala 1–4</td>
+                                <td class="py-2.5 text-right font-mono font-bold text-brand-blue">Escala 1–4</td>
                             </tr>
                             <tr>
-                                <td class="py-2.5 px-2 font-medium">7. Área de Lazer</td>
-                                <td class="py-2.5 px-2 text-slate-600 dark:text-slate-400">Zonas de descanso, networking,
-                                    lounge e
-                                    descompressão (Tem / Não tem)</td>
-                                <td class="py-2.5 px-2 text-right font-mono font-bold text-brand-blue">Binário (0 / 1)</td>
+                                <td class="py-2.5 font-medium">7. Área de Lazer (1 a 9)</td>
+                                <td class="py-2.5 text-slate-600 dark:text-slate-400">Zonas de descanso, networking,
+                                    lounge, jogos ou terraço/rooftop</td>
+                                <td class="py-2.5 text-right font-mono font-bold text-brand-blue">Escala 1–9</td>
                             </tr>
                             <tr>
-                                <td class="py-2.5 px-2 font-medium">8. AC (Climatização)</td>
-                                <td class="py-2.5 px-2 text-slate-600 dark:text-slate-400">Sistema de ar condicionado
-                                    instalado (Tem / Não tem)</td>
-                                <td class="py-2.5 px-2 text-right font-mono font-bold text-brand-blue">Binário (0 / 1)</td>
+                                <td class="py-2.5 font-medium">8. AC / Climatização (1 a 9)</td>
+                                <td class="py-2.5 text-slate-600 dark:text-slate-400">Qualidade da climatização e
+                                    conforto térmico do espaço</td>
+                                <td class="py-2.5 text-right font-mono font-bold text-brand-blue">Escala 1–9</td>
                             </tr>
-                            <tr class="bg-slate-50 dark:bg-slate-800/80 font-bold">
-                                <td class="py-2.5 px-2 text-slate-900 dark:text-white">9. Preço Mensalidade</td>
-                                <td class="py-2.5 px-2 font-normal text-slate-600 dark:text-slate-300">Valor mensal da
+                            <tr>
+                                <td class="py-2.5 font-medium">9. Preço Mensalidade</td>
+                                <td class="py-2.5 text-slate-600 dark:text-slate-400">Valor mensal da
                                     modalidade ou espaço subsidiado / acessível apenas por candidatura</td>
-                                <td class="py-2.5 px-2 text-right font-mono text-emerald-600 dark:text-emerald-400">Custo
+                                <td
+                                    class="py-2.5 text-right font-mono font-bold text-emerald-600 dark:text-emerald-400">
+                                    Custo
                                     / Candidatura</td>
                             </tr>
                         </tbody>
@@ -664,7 +662,8 @@
             <div class="flex flex-wrap items-center space-x-6 text-xs font-medium">
                 <a href="#sobre" class="hover:text-white transition-colors">Sobre</a>
                 <a href="#espacos" class="hover:text-white transition-colors">Espaços</a>
-                <a href="nucleus.html" target="_blank" class="hover:text-white transition-colors">Simulador
+                <a href="nucleus.html" target="_blank" rel="noopener"
+                    class="hover:text-white transition-colors">Simulador
                     AHP</a>
                 <a href="#processo" class="hover:text-white transition-colors">Critérios & App</a>
             </div>
@@ -679,7 +678,7 @@
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
     <script src="empresas-data.js"></script>
-    <script src="script.js"></script>
+    <script src="script.js?v=5"></script>
 </body>
 
 </html>

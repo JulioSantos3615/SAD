@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nucleus — Simulador AHP</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -30,39 +29,86 @@
             }
         }
     </script>
-
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-
-    <!-- FontAwesome for Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
-<body id="flutterAppBody"
-    class="bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100 min-h-screen flex flex-col antialiased selection:bg-blue-600 selection:text-white">
+<body class="bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100 min-h-screen flex flex-col antialiased selection:bg-blue-600 selection:text-white">
 
-    <iframe id="flutterAppFrame"
-        src="/app/"
-        title="Simulador AHP Nucleus"
-        allow="geolocation; clipboard-write"
-        loading="lazy"
-        onload="document.getElementById('flutterLoadingOverlay')?.classList.add('hidden')"
-        class="w-full h-[780px] border-0 bg-white">
-    </iframe>
+    <!-- HEADER / NAVIGATION (igual à homepage) -->
+    <header
+        class="sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-slate-950/80 border-b border-slate-100 dark:border-slate-800/80 transition-colors duration-200">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-end">
+            <!-- Actions Header Right -->
+            <div class="flex items-center space-x-3">
+                <!-- Theme Toggle Button -->
+                <button id="themeToggleBtn" onclick="toggleDarkMode()"
+                    class="p-2.5 rounded-full border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-900 transition-colors flex items-center gap-2 text-xs font-medium"
+                    title="Alternar Modo Escuro">
+                    <i id="themeIcon" class="fa-solid fa-moon text-sm"></i>
+                    <span id="themeText" class="hidden sm:inline">Escuro</span>
+                </button>
+
+                <!-- Back to Homepage CTA -->
+                <a href="main.html"
+                    class="inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-brand-blue text-white font-medium text-sm hover:bg-blue-700 transition-all shadow-sm shadow-blue-500/20 active:scale-95 gap-2">
+                    <i class="fa-solid fa-arrow-left text-xs"></i>
+                    <span>Voltar ao Site</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Expanded Container -->
+    <main class="flex-1 flex items-center justify-center p-0 sm:p-4 bg-slate-50 dark:bg-slate-950">
+        <div
+            class="relative w-full max-w-7xl h-[calc(100vh-5rem)] sm:h-[calc(100vh-7rem)] sm:rounded-2xl border-0 sm:border sm:border-slate-200 dark:sm:border-slate-800 shadow-xl overflow-hidden bg-white dark:bg-slate-900">
+
+            <div id="flutterLoadingOverlay"
+                class="absolute inset-0 z-10 bg-white dark:bg-slate-900 flex flex-col items-center justify-center gap-3 text-slate-600 dark:text-slate-300">
+                <div class="w-9 h-9 border-4 border-brand-blue border-t-transparent rounded-full animate-spin"></div>
+                <p class="text-xs sm:text-sm font-medium">A carregar Simulador Nucleus...</p>
+            </div>
+
+            <iframe id="flutterAppFrame"
+                src="/app/"
+                title="Simulador AHP Nucleus"
+                allow="geolocation; clipboard-write"
+                onload="document.getElementById('flutterLoadingOverlay')?.classList.add('hidden')"
+                class="w-full h-full border-0 bg-white block">
+            </iframe>
+        </div>
+    </main>
 
     <script>
-        if (window.location.protocol === 'file:') {
-            document.getElementById('fileProtocolWarning')?.classList.remove('hidden');
-            document.getElementById('flutterLoadingOverlay')?.classList.add('hidden');
+        function applyThemeUI() {
+            const isDark = document.documentElement.classList.contains('dark');
+            const icon = document.getElementById('themeIcon');
+            const text = document.getElementById('themeText');
+            if (icon) icon.className = isDark ? 'fa-solid fa-sun text-sm text-amber-400' : 'fa-solid fa-moon text-sm';
+            if (text) text.textContent = isDark ? 'Claro' : 'Escuro';
         }
-    </script>
 
+        function toggleDarkMode() {
+            const htmlEl = document.documentElement;
+            if (htmlEl.classList.contains('dark')) {
+                htmlEl.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                htmlEl.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+            applyThemeUI();
+        }
+
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        }
+        applyThemeUI();
+    </script>
 </body>
 
 </html>
