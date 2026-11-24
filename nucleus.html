@@ -8,17 +8,13 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
-            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
                         brand: {
                             blue: '#1d63ed',
                             darkBlue: '#1548b8',
-                            lightBlue: '#ebf2ff',
-                            darkBg: '#0f172a',
-                            darkCard: '#1e293b',
-                            slateBorder: '#334155'
+                            lightBlue: '#ebf2ff'
                         }
                     },
                     fontFamily: {
@@ -36,39 +32,26 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
-<body class="bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100 min-h-screen flex flex-col antialiased selection:bg-blue-600 selection:text-white">
+<body class="bg-white text-slate-900 min-h-screen flex flex-col antialiased selection:bg-blue-600 selection:text-white">
 
-    <!-- HEADER / NAVIGATION (igual à homepage) -->
-    <header
-        class="sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-slate-950/80 border-b border-slate-100 dark:border-slate-800/80 transition-colors duration-200">
+    <!-- HEADER / NAVIGATION (Tema Claro) -->
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-white/80 border-b border-slate-100">
         <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-end">
-            <!-- Actions Header Right -->
-            <div class="flex items-center space-x-3">
-                <!-- Theme Toggle Button -->
-                <button id="themeToggleBtn" onclick="toggleDarkMode()"
-                    class="p-2.5 rounded-full border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-900 transition-colors flex items-center gap-2 text-xs font-medium"
-                    title="Alternar Modo Escuro">
-                    <i id="themeIcon" class="fa-solid fa-moon text-sm"></i>
-                    <span id="themeText" class="hidden sm:inline">Escuro</span>
-                </button>
-
-                <!-- Back to Homepage CTA -->
-                <a href="main.html"
-                    class="inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-brand-blue text-white font-medium text-sm hover:bg-blue-700 transition-all shadow-sm shadow-blue-500/20 active:scale-95 gap-2">
-                    <i class="fa-solid fa-arrow-left text-xs"></i>
-                    <span>Voltar ao Site</span>
-                </a>
-            </div>
+            <a href="main.html"
+                class="inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-brand-blue text-white font-medium text-sm hover:bg-blue-700 transition-all shadow-sm shadow-blue-500/20 active:scale-95 gap-2">
+                <i class="fa-solid fa-arrow-left text-xs"></i>
+                <span>Voltar ao Site</span>
+            </a>
         </div>
     </header>
 
     <!-- Main Expanded Container -->
-    <main class="flex-1 flex items-center justify-center p-0 sm:p-4 bg-slate-50 dark:bg-slate-950">
+    <main class="flex-1 flex items-center justify-center p-0 sm:p-4 bg-slate-50">
         <div
-            class="relative w-full max-w-7xl h-[calc(100vh-5rem)] sm:h-[calc(100vh-7rem)] sm:rounded-2xl border-0 sm:border sm:border-slate-200 dark:sm:border-slate-800 shadow-xl overflow-hidden bg-white dark:bg-slate-900">
+            class="relative w-full max-w-7xl h-[calc(100vh-4rem)] sm:h-[calc(100vh-6rem)] sm:rounded-2xl border-0 sm:border sm:border-slate-200 shadow-xl overflow-hidden bg-white">
 
             <div id="flutterLoadingOverlay"
-                class="absolute inset-0 z-10 bg-white dark:bg-slate-900 flex flex-col items-center justify-center gap-3 text-slate-600 dark:text-slate-300">
+                class="absolute inset-0 z-10 bg-white flex flex-col items-center justify-center gap-3 text-slate-600">
                 <div class="w-9 h-9 border-4 border-brand-blue border-t-transparent rounded-full animate-spin"></div>
                 <p class="text-xs sm:text-sm font-medium">A carregar Simulador Nucleus...</p>
             </div>
@@ -82,33 +65,6 @@
             </iframe>
         </div>
     </main>
-
-    <script>
-        function applyThemeUI() {
-            const isDark = document.documentElement.classList.contains('dark');
-            const icon = document.getElementById('themeIcon');
-            const text = document.getElementById('themeText');
-            if (icon) icon.className = isDark ? 'fa-solid fa-sun text-sm text-amber-400' : 'fa-solid fa-moon text-sm';
-            if (text) text.textContent = isDark ? 'Claro' : 'Escuro';
-        }
-
-        function toggleDarkMode() {
-            const htmlEl = document.documentElement;
-            if (htmlEl.classList.contains('dark')) {
-                htmlEl.classList.remove('dark');
-                localStorage.setItem('theme', 'light');
-            } else {
-                htmlEl.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
-            }
-            applyThemeUI();
-        }
-
-        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-        }
-        applyThemeUI();
-    </script>
 </body>
 
 </html>
